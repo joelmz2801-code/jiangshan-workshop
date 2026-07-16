@@ -41,9 +41,9 @@ export const services: ServiceItem[] = [
     id: 'patch-repair',
     title: '补洞修复',
     description:
-      '专注墙面、木质、大理石等各类材质的孔洞修复。采用专业填充材料与精密工艺，修复后表面平整光滑，与原有材质浑然一体，不留痕迹。无论是装修遗留的钉孔、意外磕碰，还是岁月侵蚀的破损，都能恢复如初。',
+      '专注木质、大理石等各类材质的孔洞修复。采用专业填充材料与精密工艺，修复后表面平整光滑，与原有材质浑然一体，不留痕迹。无论是装修遗留的钉孔、意外磕碰，还是岁月侵蚀的破损，都能恢复如初。',
     image: '/assets/service-patch.jpg',
-    imageAlt: '墙面补洞修复过程',
+    imageAlt: '补洞修复过程',
     colSpan: 7,
   },
   {
@@ -89,12 +89,6 @@ export const materials: MaterialItem[] = [
     name: '瓷砖',
     image: '/assets/material-stone.jpg',
     imageAlt: '瓷砖纹理',
-  },
-  {
-    id: 'metal',
-    name: '金属',
-    image: '/assets/material-metal.jpg',
-    imageAlt: '拉丝黄铜金属表面',
   },
 ];
 

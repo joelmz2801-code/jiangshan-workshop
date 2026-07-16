@@ -13,7 +13,7 @@ export default function Hero() {
     <section
       id="hero"
       className="relative w-full overflow-hidden"
-      style={{ minHeight: '100vh' }}
+      style={{ minHeight: '100vh', scrollSnapAlign: 'start', scrollSnapStop: 'always' }}
     >
       {/* 背景图 */}
       <img

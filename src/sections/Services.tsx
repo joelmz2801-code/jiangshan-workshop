@@ -13,8 +13,8 @@ export default function Services() {
   return (
     <section
       id="services"
-      className="px-6 lg:px-8"
-      style={{ paddingTop: '40px', paddingBottom: '120px' }}
+      className="snap-section px-6 lg:px-8"
+      style={{ paddingTop: '100px', paddingBottom: '80px' }}
     >
       <div className="mx-auto" style={{ maxWidth: '1280px' }}>
         <SectionTitle

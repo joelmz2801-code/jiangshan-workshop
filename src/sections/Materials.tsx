@@ -6,17 +6,17 @@ import SectionTitle from '@/components/SectionTitle';
 /**
  * 材质展示区
  * - 浅米灰背景
- * - 4 列网格（移动端 2 列）
+ * - 3 列网格（移动端 2 列）
  * - 4:5 比例卡片
  */
 export default function Materials() {
   return (
     <section
       id="materials"
-      className="px-6 lg:px-8"
+      className="snap-section px-6 lg:px-8"
       style={{
-        paddingTop: '120px',
-        paddingBottom: '120px',
+        paddingTop: '100px',
+        paddingBottom: '80px',
         background: 'hsl(var(--muted))',
       }}
     >
@@ -31,7 +31,7 @@ export default function Materials() {
           initial="hidden"
           whileInView="visible"
           viewport={viewportOnce}
-          className="grid grid-cols-2 lg:grid-cols-4"
+          className="grid grid-cols-2 lg:grid-cols-3"
           style={{ gap: '1.5rem', marginTop: '4rem' }}
         >
           {materials.map((material) => (

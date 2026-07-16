@@ -10,6 +10,12 @@ export default function Footer() {
         background: 'hsl(var(--foreground))',
         color: 'hsl(var(--primary-foreground))',
         padding: '3rem 1.5rem',
+        minHeight: '100vh',
+        scrollSnapAlign: 'start',
+        scrollSnapStop: 'always',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
       }}
     >
       <div

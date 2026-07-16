@@ -71,7 +71,8 @@
 
 @layer base {
   html {
-    scroll-behavior: smooth;
+    /* 整页吸附滚动：一次滚动跳一页 */
+    scroll-snap-type: y mandatory;
   }
 
   body {
@@ -87,9 +88,14 @@
     min-height: 100vh;
   }
 
-  /* 锚点滚动避开固定导航 */
-  section[id] {
-    scroll-margin-top: 72px;
+  /* 每个 section 占满一屏并对齐顶部 */
+  .snap-section {
+    min-height: 100vh;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 }
 
@@ -114,7 +120,7 @@
 
 @media (prefers-reduced-motion: reduce) {
   html {
-    scroll-behavior: auto;
+    scroll-snap-type: none;
   }
   * {
     animation-duration: 0.01ms !important;
