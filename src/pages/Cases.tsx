@@ -1,13 +1,28 @@
 import { motion } from 'framer-motion';
-import { ArrowLeft, ImageIcon } from 'lucide-react';
+import { ArrowLeft } from 'lucide-react';
 import { site } from '@/data/content';
 import { fadeInUp, staggerContainer, staggerItem, viewportOnce } from '@/lib/motion';
 import ThemeToggle from '@/components/ThemeToggle';
 
 /**
  * 真实案例页 — 展示修复前后的对比效果
- * 图片待后续提供，当前为占位状态
+ * 4 组对比：A / B / C / D（每组 1=修复前、2=修复后）
  */
+interface CaseGroup {
+  id: string;
+  label: string;
+  before: string;
+  after: string;
+  desc: string;
+}
+
+const caseGroups: CaseGroup[] = [
+  { id: 'A', label: '案例 A', before: './assets/cases/A1.jpeg', after: './assets/cases/A2.jpeg', desc: '修复前后对比' },
+  { id: 'B', label: '案例 B', before: './assets/cases/B1.jpeg', after: './assets/cases/B2.jpeg', desc: '修复前后对比' },
+  { id: 'C', label: '案例 C', before: './assets/cases/C1.jpeg', after: './assets/cases/C2.jpeg', desc: '修复前后对比' },
+  { id: 'D', label: '案例 D', before: './assets/cases/D1.jpeg', after: './assets/cases/D2.jpeg', desc: '修复前后对比' },
+];
+
 export default function Cases() {
   return (
     <div style={{ minHeight: '100vh', background: 'hsl(var(--background))' }}>
@@ -97,7 +112,7 @@ export default function Cases() {
             </p>
           </motion.div>
 
-          {/* 案例占位区 — 图片待提供 */}
+          {/* 案例对比网格 */}
           <motion.div
             variants={staggerContainer}
             initial="hidden"
@@ -106,9 +121,9 @@ export default function Cases() {
             className="grid grid-cols-1 md:grid-cols-2"
             style={{ gap: '2rem', marginTop: '3.5rem' }}
           >
-            {[1, 2, 3, 4].map((idx) => (
+            {caseGroups.map((group) => (
               <motion.div
-                key={idx}
+                key={group.id}
                 variants={staggerItem}
                 className="overflow-hidden"
                 style={{
@@ -119,28 +134,36 @@ export default function Cases() {
               >
                 {/* 对比图区域 */}
                 <div
-                  className="flex items-stretch"
+                  className="grid grid-cols-2"
                   style={{ minHeight: '280px' }}
                 >
                   {/* 之前 */}
                   <div
-                    className="flex flex-1 flex-col items-center justify-center"
+                    className="relative"
                     style={{
-                      background: 'hsl(var(--muted))',
                       borderRight: '1px solid hsl(var(--border))',
-                      padding: '2rem 1rem',
-                      gap: '0.75rem',
+                      background: 'hsl(var(--muted))',
                     }}
                   >
-                    <ImageIcon
-                      size={32}
-                      style={{ color: 'hsl(var(--muted-foreground))', opacity: 0.5 }}
+                    <img
+                      src={group.before}
+                      alt={`${group.label} 修复前`}
+                      loading="lazy"
+                      className="h-full w-full object-cover"
+                      style={{ minHeight: '280px' }}
                     />
                     <span
+                      className="absolute"
                       style={{
-                        color: 'hsl(var(--muted-foreground))',
-                        fontSize: '14px',
-                        fontWeight: 500,
+                        top: '12px',
+                        left: '12px',
+                        padding: '4px 10px',
+                        background: 'hsl(var(--foreground) / 0.85)',
+                        color: 'hsl(var(--primary-foreground))',
+                        fontSize: '12px',
+                        fontWeight: 600,
+                        borderRadius: '4px',
+                        letterSpacing: '0.02em',
                       }}
                     >
                       之前
@@ -148,22 +171,28 @@ export default function Cases() {
                   </div>
                   {/* 之后 */}
                   <div
-                    className="flex flex-1 flex-col items-center justify-center"
-                    style={{
-                      background: 'hsl(var(--accent))',
-                      padding: '2rem 1rem',
-                      gap: '0.75rem',
-                    }}
+                    className="relative"
+                    style={{ background: 'hsl(var(--accent))' }}
                   >
-                    <ImageIcon
-                      size={32}
-                      style={{ color: 'hsl(var(--muted-foreground))', opacity: 0.5 }}
+                    <img
+                      src={group.after}
+                      alt={`${group.label} 修复后`}
+                      loading="lazy"
+                      className="h-full w-full object-cover"
+                      style={{ minHeight: '280px' }}
                     />
                     <span
+                      className="absolute"
                       style={{
-                        color: 'hsl(var(--accent-foreground))',
-                        fontSize: '14px',
-                        fontWeight: 500,
+                        top: '12px',
+                        left: '12px',
+                        padding: '4px 10px',
+                        background: 'hsl(var(--secondary))',
+                        color: 'hsl(var(--secondary-foreground))',
+                        fontSize: '12px',
+                        fontWeight: 600,
+                        borderRadius: '4px',
+                        letterSpacing: '0.02em',
                       }}
                     >
                       之后
@@ -171,36 +200,31 @@ export default function Cases() {
                   </div>
                 </div>
                 {/* 案例说明 */}
-                <div style={{ padding: '1.25rem 1.5rem' }}>
+                <div
+                  className="flex items-center justify-between"
+                  style={{ padding: '1.25rem 1.5rem' }}
+                >
+                  <span
+                    style={{
+                      color: 'hsl(var(--foreground))',
+                      fontSize: '15px',
+                      fontWeight: 600,
+                    }}
+                  >
+                    {group.label}
+                  </span>
                   <span
                     style={{
                       color: 'hsl(var(--muted-foreground))',
-                      fontSize: '14px',
+                      fontSize: '13px',
                     }}
                   >
-                    案例 {idx}：图片待上传
+                    {group.desc}
                   </span>
                 </div>
               </motion.div>
             ))}
           </motion.div>
-
-          {/* 提示 */}
-          <motion.p
-            variants={fadeInUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={viewportOnce}
-            className="text-center"
-            style={{
-              color: 'hsl(var(--muted-foreground))',
-              fontSize: '14px',
-              marginTop: '3rem',
-              opacity: 0.7,
-            }}
-          >
-            更多案例图片整理中，敬请期待
-          </motion.p>
         </div>
       </main>
 
