@@ -71,8 +71,8 @@
 
 @layer base {
   html {
-    /* 整页吸附滚动：一次滚动跳一页 */
-    scroll-snap-type: y mandatory;
+    /* 锚点跳转平滑（导航栏点击） */
+    scroll-behavior: smooth;
   }
 
   body {
@@ -88,14 +88,23 @@
     min-height: 100vh;
   }
 
-  /* 每个 section 占满一屏并对齐顶部 */
+  /* 每个 section 占满一屏并垂直居中 */
   .snap-section {
     min-height: 100vh;
-    scroll-snap-align: start;
-    scroll-snap-stop: always;
     display: flex;
     flex-direction: column;
     justify-content: center;
+  }
+}
+
+/* 移动端保留原生 scroll-snap（桌面端由 JS 接管实现丝滑缓动） */
+@media (pointer: coarse) {
+  html {
+    scroll-snap-type: y mandatory;
+  }
+  .snap-section {
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
   }
 }
 
@@ -120,6 +129,7 @@
 
 @media (prefers-reduced-motion: reduce) {
   html {
+    scroll-behavior: auto;
     scroll-snap-type: none;
   }
   * {

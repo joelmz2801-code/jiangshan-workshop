@@ -118,12 +118,6 @@ export interface ContactItem {
 
 export const contactInfo: ContactItem[] = [
   {
-    key: 'address',
-    label: '地址',
-    value: '[Your Address Here]',
-    icon: 'map-pin',
-  },
-  {
     key: 'whatsapp',
     label: 'WhatsApp',
     value: '0162523524',
