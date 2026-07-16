@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/assets/logo.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>匠缮工坊 — 专业补洞修复与手工调色</title>
+    <meta
+      name="description"
+      content="匠缮工坊专注补洞修复与手工调色，为墙面、木质、大理石、石材、金属等材质提供专业修复服务，匠心修补，浑然天成。"
+    />
+    <meta
+      name="keywords"
+      content="补洞修复,手工调色,墙面修复,木质修复,大理石修复,石材修复,金属修复,匠缮工坊"
+    />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="匠缮工坊 — 专业补洞修复与手工调色" />
+    <meta
+      property="og:description"
+      content="专注补洞修复与手工调色，让每一道瑕疵消失于无形。"
+    />
+    <meta property="og:image" content="/assets/hero-craftsman.jpg" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="匠缮工坊 — 专业补洞修复与手工调色" />
+    <meta
+      name="twitter:description"
+      content="专注补洞修复与手工调色，让每一道瑕疵消失于无形。"
+    />
+
+    <!-- 字体预连接 + 加载 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- 主题初始化（避免 FOUC） -->
+    <script>
+      (function () {
+        try {
+          var saved = localStorage.getItem('theme');
+          var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var theme = saved || (prefersDark ? 'dark' : 'light');
+          var root = document.documentElement;
+          root.classList.remove('light', 'dark');
+          root.classList.add(theme);
+        } catch (e) {
+          document.documentElement.classList.add('light');
+        }
+      })();
+    </script>
+
+    <script type="module">
+      if (import.meta.hot?.on) {
+        import.meta.hot.on('vite:error', (error) => {
+          if (error.err) {
+            console.error(
+              [error.err.message, error.err.frame].filter(Boolean).join('\n'),
+            )
+          }
+        })
+      }
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

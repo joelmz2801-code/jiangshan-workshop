@@ -12,15 +12,17 @@ dist
 dist-ssr
 *.local
 
-# 设计稿解压临时目录
+# 设计稿解压临时目录（不纳入版本控制）
 _design_extract/
 .uploads/
-_batch*.json
 
-# 历史项目
+# TRAE IDE 内部文档
+.trae/
+
+# 历史项目，不纳入新仓库
 renovation-repair/
 
-# Editor
+# Editor directories and files
 .vscode/*
 !.vscode/extensions.json
 .idea

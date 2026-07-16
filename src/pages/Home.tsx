@@ -7,6 +7,9 @@ import Services from '@/sections/Services';
 import Materials from '@/sections/Materials';
 import Contact from '@/sections/Contact';
 
+/**
+ * 首页 — 单页滚动结构
+ */
 export default function Home() {
   return (
     <div className="min-h-screen">

@@ -2,14 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
+/* 设计稿主题变量 — 亮色模式 */
 :root {
+  /* bg */
   --background: 40 16% 98%;
   --card: 40 16% 98%;
   --popover: 40 16% 98%;
+
+  /* text */
   --foreground: 37.5 15.6863% 20%;
   --card-foreground: 37.5 15.6863% 20%;
   --popover-foreground: 37.5 15.6863% 20%;
   --muted-foreground: 36 19.8413% 49.4118%;
+
+  /* accent */
   --primary: 37.5 15.6863% 20%;
   --primary-foreground: 40 16% 98%;
   --secondary: 55 24% 49.0196%;
@@ -17,26 +23,36 @@
   --muted: 44 26.3158% 88.8235%;
   --accent: 40 24.0876% 73.1373%;
   --accent-foreground: 30 14% 30%;
+
+  /* status */
   --destructive: 0 84.2% 60.2%;
   --destructive-foreground: 0 0% 98%;
+
+  /* border */
   --border: 43.3333 23.0769% 84.7059%;
   --input: 44 26.3158% 88.8235%;
   --ring: 37.5 15.6863% 20%;
+
+  /* radius */
   --radius: 2rem;
   --radius-sm: 0.5rem;
   --radius-md: 1rem;
   --radius-lg: 2rem;
+
   --tracking-normal: 0.01em;
 }
 
+/* 设计稿主题变量 — 暗色模式 */
 .dark {
   --background: 12 71.4286% 1.3725%;
   --card: 12 71.4286% 1.3725%;
   --popover: 12 71.4286% 1.3725%;
+
   --foreground: 41.5385 18.8406% 86.4706%;
   --card-foreground: 41.5385 18.8406% 86.4706%;
   --popover-foreground: 41.5385 18.8406% 86.4706%;
   --muted-foreground: 35 15% 60%;
+
   --primary: 41.5385 18.8406% 86.4706%;
   --primary-foreground: 12 71.4286% 1.3725%;
   --secondary: 35 25% 30%;
@@ -44,15 +60,20 @@
   --muted: 35 15% 20%;
   --accent: 35 25% 40%;
   --accent-foreground: 41.5385 18.8406% 86.4706%;
+
   --destructive: 0 84.2% 60.2%;
   --destructive-foreground: 0 0% 98%;
+
   --border: 42.8571 8.4337% 16.2745%;
   --input: 35 15% 20%;
   --ring: 35.4545 29.7297% 70.9804%;
 }
 
 @layer base {
-  html { scroll-behavior: smooth; }
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
     background-color: hsl(var(--background));
     color: hsl(var(--foreground));
@@ -65,18 +86,39 @@
     margin: 0;
     min-height: 100vh;
   }
-  section[id] { scroll-margin-top: 72px; }
+
+  /* 锚点滚动避开固定导航 */
+  section[id] {
+    scroll-margin-top: 72px;
+  }
 }
 
-.no-scrollbar::-webkit-scrollbar { display: none; }
-.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+/* 隐藏滚动条工具类 */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
 
+/* 向下弹跳动画（Hero 滚动指示器） */
 @keyframes bounce-down {
-  0%, 100% { transform: translateX(-50%) translateY(0); }
-  50% { transform: translateX(-50%) translateY(8px); }
+  0%, 100% {
+    transform: translateX(-50%) translateY(0);
+  }
+  50% {
+    transform: translateX(-50%) translateY(8px);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-  * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+  html {
+    scroll-behavior: auto;
+  }
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

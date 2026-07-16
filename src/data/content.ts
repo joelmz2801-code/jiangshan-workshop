@@ -1,5 +1,6 @@
 /**
  * 站点内容常量 — 所有可配置文案集中管理
+ * 修改这里即可更新站点显示内容，无需改动组件
  */
 
 export const site = {
@@ -29,6 +30,7 @@ export interface ServiceItem {
   description: string;
   image: string;
   imageAlt: string;
+  /** 在 12 栏网格中所占栏数（1-12） */
   colSpan: number;
 }
 
@@ -61,22 +63,66 @@ export interface MaterialItem {
 }
 
 export const materials: MaterialItem[] = [
-  { id: 'wood', name: '木质', image: '/assets/material-wood.jpg', imageAlt: '温暖的橡木纹理' },
-  { id: 'marble', name: '大理石', image: '/assets/material-marble.jpg', imageAlt: '温暖的米色大理石纹理' },
-  { id: 'stone', name: '石材', image: '/assets/material-stone.jpg', imageAlt: '天然石灰华石材纹理' },
-  { id: 'metal', name: '金属', image: '/assets/material-metal.jpg', imageAlt: '拉丝黄铜金属表面' },
+  {
+    id: 'wood',
+    name: '木质',
+    image: '/assets/material-wood.jpg',
+    imageAlt: '温暖的橡木纹理',
+  },
+  {
+    id: 'marble',
+    name: '大理石',
+    image: '/assets/material-marble.jpg',
+    imageAlt: '温暖的米色大理石纹理',
+  },
+  {
+    id: 'stone',
+    name: '石材',
+    image: '/assets/material-stone.jpg',
+    imageAlt: '天然石灰华石材纹理',
+  },
+  {
+    id: 'metal',
+    name: '金属',
+    image: '/assets/material-metal.jpg',
+    imageAlt: '拉丝黄铜金属表面',
+  },
 ];
 
 export const sectionTitles = {
-  services: { title: '专业服务', subtitle: '多年匠心沉淀，为每一处细节负责' },
-  materials: { title: '擅长材质', subtitle: '精通多种材质的修复与调色工艺' },
-  contact: { title: '联系我们', subtitle: '期待为您解决每一处表面瑕疵' },
+  services: {
+    title: '专业服务',
+    subtitle: '多年匠心沉淀，为每一处细节负责',
+  },
+  materials: {
+    title: '擅长材质',
+    subtitle: '精通多种材质的修复与调色工艺',
+  },
+  contact: {
+    title: '联系我们',
+    subtitle: '期待为您解决每一处表面瑕疵',
+  },
 } as const;
 
 export const contactInfo = [
-  { key: 'address', label: '地址', value: '[Your Address Here]', icon: 'map-pin' },
-  { key: 'phone', label: '电话', value: '[Your Phone Number]', icon: 'phone' },
-  { key: 'email', label: '邮箱', value: '[Your Email]', icon: 'mail' },
+  {
+    key: 'address',
+    label: '地址',
+    value: '[Your Address Here]',
+    icon: 'map-pin',
+  },
+  {
+    key: 'phone',
+    label: '电话',
+    value: '[Your Phone Number]',
+    icon: 'phone',
+  },
+  {
+    key: 'email',
+    label: '邮箱',
+    value: '[Your Email]',
+    icon: 'mail',
+  },
 ] as const;
 
 export const footer = {
