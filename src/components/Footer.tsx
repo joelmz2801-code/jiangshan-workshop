@@ -35,23 +35,33 @@ export default function Footer() {
           </span>
         </div>
 
-        <div className="flex items-center" style={{ gap: '1.5rem' }}>
+        <div
+          className="flex items-center"
+          style={{ gap: '1.5rem', marginRight: 'auto', marginLeft: '2rem' }}
+        >
           <a
             href={footer.rednoteUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="transition-opacity duration-200"
+            className="transition-all duration-200"
             style={{
               color: 'hsl(var(--primary-foreground))',
               fontSize: '13px',
-              opacity: 0.7,
+              opacity: 0.85,
               textDecoration: 'none',
+              padding: '6px 14px',
+              border: '1px solid hsl(var(--primary-foreground) / 0.4)',
+              borderRadius: '999px',
             }}
             onMouseEnter={(e) => {
               e.currentTarget.style.opacity = '1';
+              e.currentTarget.style.borderColor =
+                'hsl(var(--primary-foreground))';
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.opacity = '0.7';
+              e.currentTarget.style.opacity = '0.85';
+              e.currentTarget.style.borderColor =
+                'hsl(var(--primary-foreground) / 0.4)';
             }}
           >
             {footer.rednoteLabel}

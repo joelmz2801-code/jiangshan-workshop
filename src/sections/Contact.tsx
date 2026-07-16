@@ -1,7 +1,7 @@
 import { useState, type FormEvent } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MapPin, Phone, Mail, Send, CheckCircle2 } from 'lucide-react';
-import { contactInfo, sectionTitles } from '@/data/content';
+import { contactInfo, sectionTitles, serviceAreas } from '@/data/content';
 import { fadeInUp, staggerContainer, staggerItem, viewportOnce } from '@/lib/motion';
 import SectionTitle from '@/components/SectionTitle';
 
@@ -169,36 +169,60 @@ export default function Contact() {
               );
             })}
 
-            {/* 地图占位 */}
+            {/* 服务覆盖区域（中英双语）— 替代原地图占位 */}
             <div
-              className="flex items-center justify-center"
               style={{
                 background: 'hsl(var(--muted))',
                 border: '1px solid hsl(var(--border))',
                 borderRadius: 'var(--radius)',
-                minHeight: '200px',
                 padding: '2rem',
               }}
             >
-              <div className="text-center">
+              <div className="flex items-center justify-center" style={{ gap: '0.5rem' }}>
+                <MapPin size={18} style={{ color: 'hsl(var(--secondary))' }} />
                 <span
+                  className="font-sans font-semibold"
                   style={{
-                    color: 'hsl(var(--accent-foreground))',
-                    opacity: 0.5,
-                    display: 'inline-flex',
+                    color: 'hsl(var(--foreground))',
+                    fontSize: '16px',
+                    letterSpacing: '0.02em',
                   }}
                 >
-                  <MapPin size={40} />
+                  服务区域
                 </span>
-                <p
-                  style={{
-                    color: 'hsl(var(--muted-foreground))',
-                    fontSize: '14px',
-                    marginTop: '1rem',
-                  }}
-                >
-                  地图服务待接入
-                </p>
+              </div>
+              <div
+                className="flex flex-wrap items-center justify-center"
+                style={{ gap: '1.5rem', marginTop: '1.25rem' }}
+              >
+                {serviceAreas.map((area) => (
+                  <div
+                    key={area.en}
+                    className="text-center"
+                    style={{ minWidth: '80px' }}
+                  >
+                    <div
+                      style={{
+                        color: 'hsl(var(--foreground))',
+                        fontSize: '17px',
+                        fontWeight: 600,
+                        lineHeight: 1.3,
+                      }}
+                    >
+                      {area.zh}
+                    </div>
+                    <div
+                      style={{
+                        color: 'hsl(var(--muted-foreground))',
+                        fontSize: '13px',
+                        marginTop: '0.25rem',
+                        letterSpacing: '0.02em',
+                      }}
+                    >
+                      {area.en}
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           </motion.div>
