@@ -55,16 +55,6 @@ export const services: ServiceItem[] = [
     imageAlt: '手工调色过程',
     colSpan: 5,
   },
-  {
-    id: 'floor-tiles-repair',
-    title: '维修各种地板或瓷砖',
-    titleEn: 'Timber Floor & Tiles Repair',
-    description:
-      '专业承接各类地板与瓷砖的维修、更换、翻新服务。无论是地板划痕、翘起、瓷砖空鼓、开裂，还是整体翻新，均能提供精细施工，恢复原有美观与功能。',
-    image: '/assets/material-wood.jpg',
-    imageAlt: '地板与瓷砖维修',
-    colSpan: 12,
-  },
 ];
 
 /** 服务覆盖区域（中英双语） */
