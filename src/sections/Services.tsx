@@ -31,7 +31,7 @@ export default function Services() {
           style={{ gap: '2rem', marginTop: '4rem' }}
         >
           {services.map((service) => (
-            <div key={service.id} className="md:col-span-1">
+            <div key={service.id} className="min-w-0">
               <ServiceCard service={service} />
             </div>
           ))}

@@ -19,7 +19,7 @@ export default function ServiceCard({ service }: ServiceCardProps) {
       viewport={viewportOnce}
       whileHover={{ y: -3 }}
       transition={{ duration: 0.24, ease: 'easeOut' }}
-      className="service-card overflow-hidden"
+      className="service-card overflow-hidden h-full w-full"
       style={{
         background: 'hsl(var(--card))',
         border: '1px solid hsl(var(--border))',
