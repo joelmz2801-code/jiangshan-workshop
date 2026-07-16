@@ -91,9 +91,9 @@ export default function Contact() {
     <section
       id="contact"
       className="snap-section px-6 lg:px-8"
-      style={{ paddingTop: '100px', paddingBottom: '80px' }}
+      style={{ paddingTop: '96px', paddingBottom: '48px' }}
     >
-      <div className="mx-auto" style={{ maxWidth: '1280px' }}>
+      <div className="mx-auto w-full" style={{ maxWidth: '1280px' }}>
         <SectionTitle
           title={sectionTitles.contact.title}
           subtitle={sectionTitles.contact.subtitle}

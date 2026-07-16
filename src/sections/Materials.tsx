@@ -7,7 +7,7 @@ import SectionTitle from '@/components/SectionTitle';
  * 材质展示区
  * - 浅米灰背景
  * - 3 列网格（移动端 2 列）
- * - 4:5 比例卡片
+ * - 图片高度响应式 clamp，确保 snap 整页模式下内容完整展示
  */
 export default function Materials() {
   return (
@@ -15,12 +15,12 @@ export default function Materials() {
       id="materials"
       className="snap-section px-6 lg:px-8"
       style={{
-        paddingTop: '100px',
-        paddingBottom: '80px',
+        paddingTop: '96px',
+        paddingBottom: '48px',
         background: 'hsl(var(--muted))',
       }}
     >
-      <div className="mx-auto" style={{ maxWidth: '1280px' }}>
+      <div className="mx-auto w-full" style={{ maxWidth: '1280px' }}>
         <SectionTitle
           title={sectionTitles.materials.title}
           subtitle={sectionTitles.materials.subtitle}
@@ -32,7 +32,7 @@ export default function Materials() {
           whileInView="visible"
           viewport={viewportOnce}
           className="grid grid-cols-2 lg:grid-cols-3"
-          style={{ gap: '1.5rem', marginTop: '4rem' }}
+          style={{ gap: '1.25rem', marginTop: '2rem' }}
         >
           {materials.map((material) => (
             <motion.article
@@ -49,7 +49,7 @@ export default function Materials() {
             >
               <div
                 className="relative overflow-hidden"
-                style={{ aspectRatio: '4 / 5' }}
+                style={{ height: 'clamp(200px, 32vh, 340px)' }}
               >
                 <img
                   src={material.image}
@@ -68,7 +68,7 @@ export default function Materials() {
               </div>
               <div
                 style={{
-                  padding: '1.25rem 1rem',
+                  padding: '0.875rem 1rem',
                   textAlign: 'center',
                 }}
               >
@@ -76,7 +76,7 @@ export default function Materials() {
                   className="font-sans font-semibold"
                   style={{
                     color: 'hsl(var(--foreground))',
-                    fontSize: '16px',
+                    fontSize: '15px',
                   }}
                 >
                   {material.name}

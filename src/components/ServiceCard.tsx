@@ -28,7 +28,7 @@ export default function ServiceCard({ service }: ServiceCardProps) {
     >
       <div
         className="relative overflow-hidden"
-        style={{ aspectRatio: '16 / 9' }}
+        style={{ height: 'clamp(220px, 32vh, 340px)' }}
       >
         <img
           src={service.image}
@@ -44,7 +44,7 @@ export default function ServiceCard({ service }: ServiceCardProps) {
           }}
         />
       </div>
-      <div style={{ padding: '1.5rem 1.75rem 2rem' }}>
+      <div style={{ padding: '1.25rem 1.5rem 1.5rem' }}>
         <h3
           className="font-sans font-semibold"
           style={{
