@@ -6,7 +6,7 @@ import ServiceCard from '@/components/ServiceCard';
 
 /**
  * 服务介绍区
- * - 12 栏网格：补洞修复（7栏）+ 手工调色（5栏）
+ * - 12 栏网格：两卡片宽度统一（各占 6 栏），高度可不同
  * - 移动端单列
  */
 export default function Services() {
@@ -27,17 +27,11 @@ export default function Services() {
           initial="hidden"
           whileInView="visible"
           viewport={viewportOnce}
-          className="grid grid-cols-1 md:grid-cols-12"
+          className="grid grid-cols-1 md:grid-cols-2"
           style={{ gap: '2rem', marginTop: '4rem' }}
         >
           {services.map((service) => (
-            <div
-              key={service.id}
-              className="md:col-span-12"
-              style={{
-                gridColumn: `span ${service.colSpan} / span ${service.colSpan}`,
-              }}
-            >
+            <div key={service.id} className="md:col-span-1">
               <ServiceCard service={service} />
             </div>
           ))}

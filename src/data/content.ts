@@ -4,7 +4,7 @@
  */
 
 export const site = {
-  name: '匠缮工坊',
+  name: 'CK工坊',
   slogan: '匠心修补，浑然天成',
   description: '专注补洞修复与手工调色，让每一道瑕疵消失于无形',
 } as const;
