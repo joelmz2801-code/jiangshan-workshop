@@ -85,10 +85,10 @@ export const materials: MaterialItem[] = [
     imageAlt: '温暖的米色大理石纹理',
   },
   {
-    id: 'stone',
-    name: '石材',
+    id: 'tiles',
+    name: '瓷砖',
     image: '/assets/material-stone.jpg',
-    imageAlt: '天然石灰华石材纹理',
+    imageAlt: '瓷砖纹理',
   },
   {
     id: 'metal',
@@ -130,8 +130,8 @@ export const contactInfo: ContactItem[] = [
     icon: 'map-pin',
   },
   {
-    key: 'phone',
-    label: '电话 / WhatsApp',
+    key: 'whatsapp',
+    label: 'WhatsApp',
     value: '0162523524',
     icon: 'phone',
     // 点击跳转 WhatsApp（马来西亚号码 +60，去掉前导 0）

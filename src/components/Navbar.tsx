@@ -98,6 +98,26 @@ export default function Navbar() {
               {link.label}
             </a>
           ))}
+          {/* 真实案例 — 新窗口打开 */}
+          <a
+            href="./cases.html"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="nav-link transition-colors duration-200"
+            style={{
+              color: 'hsl(var(--muted-foreground))',
+              fontSize: '14px',
+              textDecoration: 'none',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.color = 'hsl(var(--foreground))';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.color = 'hsl(var(--muted-foreground))';
+            }}
+          >
+            真实案例
+          </a>
         </div>
 
         {/* 移动端汉堡按钮 */}
@@ -152,6 +172,27 @@ export default function Navbar() {
                   {link.label}
                 </a>
               ))}
+              {/* 真实案例 — 新窗口打开 */}
+              <a
+                href="./cases.html"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={handleNavClick}
+                className="block rounded-md px-3 py-3 transition-colors duration-200"
+                style={{
+                  color: 'hsl(var(--foreground))',
+                  fontSize: '16px',
+                  textDecoration: 'none',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = 'hsl(var(--muted))';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = 'transparent';
+                }}
+              >
+                真实案例
+              </a>
             </div>
           </motion.div>
         )}

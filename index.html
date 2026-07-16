@@ -8,11 +8,11 @@
     <title>KLB工坊 — 专业补洞修复与手工调色</title>
     <meta
       name="description"
-      content="KLB工坊专注补洞修复与手工调色，为墙面、木质、大理石、石材、金属等材质提供专业修复服务，匠心修补，浑然天成。"
+      content="KLB工坊专注补洞修复与手工调色，为墙面、木质、大理石、瓷砖、金属等材质提供专业修复服务，匠心修补，浑然天成。"
     />
     <meta
       name="keywords"
-      content="补洞修复,手工调色,墙面修复,木质修复,大理石修复,石材修复,金属修复,KLB工坊"
+      content="补洞修复,手工调色,墙面修复,木质修复,大理石修复,瓷砖修复,金属修复,KLB工坊"
     />
 
     <!-- Open Graph -->
@@ -55,6 +55,18 @@
         } catch (e) {
           document.documentElement.classList.add('light');
         }
+      })();
+    </script>
+
+    <!-- 刷新时强制回到页面顶部（Hero 区） -->
+    <script>
+      (function () {
+        if ('scrollRestoration' in history) {
+          history.scrollRestoration = 'manual';
+        }
+        window.addEventListener('load', function () {
+          window.scrollTo(0, 0);
+        });
       })();
     </script>
 
