@@ -28,7 +28,7 @@ export default function ServiceCard({ service }: ServiceCardProps) {
     >
       <div
         className="relative overflow-hidden"
-        style={{ aspectRatio: '16 / 10' }}
+        style={{ aspectRatio: '16 / 9' }}
       >
         <img
           src={service.image}
@@ -44,7 +44,7 @@ export default function ServiceCard({ service }: ServiceCardProps) {
           }}
         />
       </div>
-      <div style={{ padding: '2rem 2rem 2.5rem' }}>
+      <div style={{ padding: '1.5rem 1.75rem 2rem' }}>
         <h3
           className="font-sans font-semibold"
           style={{
@@ -55,6 +55,20 @@ export default function ServiceCard({ service }: ServiceCardProps) {
         >
           {service.title}
         </h3>
+        {service.titleEn && (
+          <p
+            className="font-sans"
+            style={{
+              color: 'hsl(var(--secondary))',
+              fontSize: '14px',
+              lineHeight: 1.4,
+              marginTop: '0.25rem',
+              letterSpacing: '0.02em',
+            }}
+          >
+            {service.titleEn}
+          </p>
+        )}
         <p
           style={{
             color: 'hsl(var(--muted-foreground))',

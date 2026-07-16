@@ -1,7 +1,7 @@
 import { site, footer } from '@/data/content';
 
 /**
- * 页脚 — 深色背景，品牌信息 + 版权
+ * 页脚 — 深色背景，品牌信息 + 社交链接 + 版权
  */
 export default function Footer() {
   return (
@@ -34,6 +34,30 @@ export default function Footer() {
             {site.name}
           </span>
         </div>
+
+        <div className="flex items-center" style={{ gap: '1.5rem' }}>
+          <a
+            href={footer.rednoteUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="transition-opacity duration-200"
+            style={{
+              color: 'hsl(var(--primary-foreground))',
+              fontSize: '13px',
+              opacity: 0.7,
+              textDecoration: 'none',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.opacity = '1';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.opacity = '0.7';
+            }}
+          >
+            {footer.rednoteLabel}
+          </a>
+        </div>
+
         <p style={{ fontSize: '13px', opacity: 0.6 }}>{footer.copyright}</p>
       </div>
     </footer>

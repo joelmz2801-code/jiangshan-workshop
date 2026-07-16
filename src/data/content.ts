@@ -27,6 +27,8 @@ export const hero = {
 export interface ServiceItem {
   id: string;
   title: string;
+  /** 英文标题（双语展示） */
+  titleEn?: string;
   description: string;
   image: string;
   imageAlt: string;
@@ -53,6 +55,23 @@ export const services: ServiceItem[] = [
     imageAlt: '手工调色过程',
     colSpan: 5,
   },
+  {
+    id: 'floor-tiles-repair',
+    title: '维修各种地板或瓷砖',
+    titleEn: 'Timber Floor & Tiles Repair',
+    description:
+      '专业承接各类地板与瓷砖的维修、更换、翻新服务。无论是地板划痕、翘起、瓷砖空鼓、开裂，还是整体翻新，均能提供精细施工，恢复原有美观与功能。',
+    image: '/assets/material-wood.jpg',
+    imageAlt: '地板与瓷砖维修',
+    colSpan: 12,
+  },
+];
+
+/** 服务覆盖区域（中英双语） */
+export const serviceAreas: { zh: string; en: string }[] = [
+  { zh: '吉隆坡', en: 'Kuala Lumpur' },
+  { zh: '雪兰莪', en: 'Selangor' },
+  { zh: '森美兰', en: 'Negeri Sembilan' },
 ];
 
 export interface MaterialItem {
@@ -139,4 +158,8 @@ export const contactInfo: ContactItem[] = [
 
 export const footer = {
   copyright: `© ${new Date().getFullYear()} KLB工坊. 保留所有权利.`,
+  /** 小红书主页链接 */
+  rednoteUrl:
+    'https://www.rednote.com/user/profile/61ab537d000000001000d825?xsec_token=ABRc08PgYdAsJkKuCcJMuqOzCz7IOoGQubA6jObn8w90I=&xsec_source=pc_note',
+  rednoteLabel: '小红书',
 } as const;
