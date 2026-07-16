@@ -104,7 +104,16 @@ export const sectionTitles = {
   },
 } as const;
 
-export const contactInfo = [
+export interface ContactItem {
+  key: string;
+  label: string;
+  value: string;
+  icon: string;
+  /** 可选链接：电话跳 WhatsApp、邮箱跳 mailto */
+  href?: string;
+}
+
+export const contactInfo: ContactItem[] = [
   {
     key: 'address',
     label: '地址',
@@ -113,17 +122,20 @@ export const contactInfo = [
   },
   {
     key: 'phone',
-    label: '电话',
-    value: '[Your Phone Number]',
+    label: '电话 / WhatsApp',
+    value: '0162523524',
     icon: 'phone',
+    // 点击跳转 WhatsApp（马来西亚号码 +60，去掉前导 0）
+    href: 'https://wa.me/60162523524',
   },
   {
     key: 'email',
     label: '邮箱',
-    value: '[Your Email]',
+    value: 'ck.887@outlook.com',
     icon: 'mail',
+    href: 'mailto:ck.887@outlook.com',
   },
-] as const;
+];
 
 export const footer = {
   copyright: `© ${new Date().getFullYear()} KLB工坊. 保留所有权利.`,

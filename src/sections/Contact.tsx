@@ -111,8 +111,23 @@ export default function Contact() {
           <motion.div variants={staggerItem} style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
             {contactInfo.map((item) => {
               const Icon = iconMap[item.icon as keyof typeof iconMap] ?? MapPin;
+              // 有 href 的项渲染为可点击链接（电话跳 WhatsApp、邮箱跳 mailto）
+              const Tag: React.ElementType = item.href ? 'a' : 'div';
+              const linkProps = item.href
+                ? { href: item.href, target: '_blank', rel: 'noopener noreferrer' }
+                : {};
               return (
-                <div key={item.key} className="flex" style={{ gap: '1rem', alignItems: 'flex-start' }}>
+                <Tag
+                  key={item.key}
+                  className="flex"
+                  style={{
+                    gap: '1rem',
+                    alignItems: 'flex-start',
+                    textDecoration: 'none',
+                    cursor: item.href ? 'pointer' : 'default',
+                  }}
+                  {...linkProps}
+                >
                   <span
                     className="shrink-0"
                     style={{
@@ -137,15 +152,20 @@ export default function Contact() {
                     </span>
                     <span
                       style={{
-                        color: 'hsl(var(--muted-foreground))',
+                        color: item.href
+                          ? 'hsl(var(--secondary))'
+                          : 'hsl(var(--muted-foreground))',
                         fontSize: '15px',
                         lineHeight: 1.6,
+                        textDecoration: item.href ? 'underline' : 'none',
+                        textDecorationColor: 'hsl(var(--border))',
+                        textUnderlineOffset: '3px',
                       }}
                     >
                       {item.value}
                     </span>
                   </div>
-                </div>
+                </Tag>
               );
             })}
 

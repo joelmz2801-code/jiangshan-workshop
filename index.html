@@ -45,8 +45,10 @@
       (function () {
         try {
           var saved = localStorage.getItem('theme');
+          var isMobile = window.matchMedia('(max-width: 768px)').matches;
           var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-          var theme = saved || (prefersDark ? 'dark' : 'light');
+          // 移动端未保存偏好时默认亮色；桌面端跟随系统偏好
+          var theme = saved || (isMobile ? 'light' : (prefersDark ? 'dark' : 'light'));
           var root = document.documentElement;
           root.classList.remove('light', 'dark');
           root.classList.add(theme);
