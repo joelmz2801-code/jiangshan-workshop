@@ -1,4 +1,4 @@
-# 匠缮工坊官网
+# KLB工坊官网
 
 基于设计稿还原的工艺修补工作室展示型官网，采用 Vite + React + TypeScript + TailwindCSS 构建，支持亮/暗主题、多端适配，并预配置 GitHub Pages 与 Cloudflare Pages 双部署方案。
 
@@ -69,7 +69,7 @@ src/
 
 ```bash
 npm run build
-npx wrangler pages deploy dist --project-name=jiangshan-workshop
+npx wrangler pages deploy dist --project-name=klb-workshop
 ```
 
 `public/_headers` 已配置静态资源缓存策略与安全头。

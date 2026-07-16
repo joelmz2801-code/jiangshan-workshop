@@ -4,7 +4,7 @@
  */
 
 export const site = {
-  name: 'CK工坊',
+  name: 'KLB工坊',
   slogan: '匠心修补，浑然天成',
   description: '专注补洞修复与手工调色，让每一道瑕疵消失于无形',
 } as const;
@@ -126,5 +126,5 @@ export const contactInfo = [
 ] as const;
 
 export const footer = {
-  copyright: `© ${new Date().getFullYear()} 匠缮工坊. 保留所有权利.`,
+  copyright: `© ${new Date().getFullYear()} KLB工坊. 保留所有权利.`,
 } as const;
