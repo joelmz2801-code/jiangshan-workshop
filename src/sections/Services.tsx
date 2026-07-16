@@ -14,7 +14,7 @@ export default function Services() {
     <section
       id="services"
       className="px-6 lg:px-8"
-      style={{ paddingTop: '120px', paddingBottom: '120px' }}
+      style={{ paddingTop: '72px', paddingBottom: '120px' }}
     >
       <div className="mx-auto" style={{ maxWidth: '1280px' }}>
         <SectionTitle
@@ -28,7 +28,7 @@ export default function Services() {
           whileInView="visible"
           viewport={viewportOnce}
           className="grid grid-cols-1 md:grid-cols-2"
-          style={{ gap: '2rem', marginTop: '4rem' }}
+          style={{ gap: '2rem', marginTop: '2.5rem' }}
         >
           {services.map((service) => (
             <div key={service.id} className="min-w-0">
