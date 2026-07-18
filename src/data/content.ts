@@ -177,6 +177,13 @@ export const contactInfo: ContactItem[] = [
     icon: 'mail',
     href: 'mailto:ck.887@outlook.com',
   },
+  {
+    key: 'rednote',
+    label: { zh: '小红书', en: 'RedNote' },
+    value: 'KLB工坊',
+    icon: 'link',
+    href: 'https://www.rednote.com/user/profile/61ab537d000000001000d825?xsec_token=ABRc08PgYdAsJkKuCcJMuqOzCz7IOoGQubA6jObn8w90I=&xsec_source=pc_note',
+  },
 ];
 
 /** 联系表单相关文案 */
@@ -204,10 +211,6 @@ export const footer = {
     zh: `© ${new Date().getFullYear()} KLB工坊. 保留所有权利.`,
     en: `© ${new Date().getFullYear()} KLB Workshop. All rights reserved.`,
   } as LocalizedText,
-  /** 小红书主页链接 */
-  rednoteUrl:
-    'https://www.rednote.com/user/profile/61ab537d000000001000d825?xsec_token=ABRc08PgYdAsJkKuCcJMuqOzCz7IOoGQubA6jObn8w90I=&xsec_source=pc_note',
-  rednoteLabel: { zh: '小红书', en: 'RedNote' } as LocalizedText,
 } as const;
 
 /** 滚动指示器 aria-label */

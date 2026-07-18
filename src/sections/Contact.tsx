@@ -1,6 +1,6 @@
 import { useState, type FormEvent } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { MapPin, Phone, Mail, Send, CheckCircle2 } from 'lucide-react';
+import { MapPin, Phone, Mail, Send, CheckCircle2, Link as LinkIcon } from 'lucide-react';
 import {
   contactInfo,
   sectionTitles,
@@ -16,6 +16,7 @@ const iconMap = {
   'map-pin': MapPin,
   phone: Phone,
   mail: Mail,
+  link: LinkIcon,
 } as const;
 
 interface FormState {
