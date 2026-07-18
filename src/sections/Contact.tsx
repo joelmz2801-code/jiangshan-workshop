@@ -157,7 +157,16 @@ export default function Contact() {
                         marginBottom: '0.25rem',
                       }}
                     >
-                      {t(item.label)}
+                      {mode === 'bi' ? (
+                        <span style={{ display: 'inline-flex', flexDirection: 'column', lineHeight: 1.2 }}>
+                          <span>{item.label.zh}</span>
+                          <span style={{ fontSize: '12px', color: 'hsl(var(--secondary))', opacity: 0.85, marginTop: '2px', letterSpacing: '0.02em' }}>
+                            {item.label.en}
+                          </span>
+                        </span>
+                      ) : (
+                        t(item.label)
+                      )}
                     </span>
                     <span
                       style={{
@@ -190,7 +199,7 @@ export default function Contact() {
               <div className="flex items-center justify-center" style={{ gap: '0.5rem' }}>
                 <MapPin size={18} style={{ color: 'hsl(var(--secondary))' }} />
                 {mode === 'bi' ? (
-                  <>
+                  <span style={{ display: 'inline-flex', flexDirection: 'column', lineHeight: 1.2, alignItems: 'center' }}>
                     <span
                       className="font-sans font-semibold"
                       style={{
@@ -206,13 +215,14 @@ export default function Contact() {
                       style={{
                         color: 'hsl(var(--secondary))',
                         fontSize: '12px',
-                        marginLeft: '0.35rem',
                         opacity: 0.85,
+                        marginTop: '2px',
+                        letterSpacing: '0.02em',
                       }}
                     >
                       {serviceAreasTitle.en}
                     </span>
-                  </>
+                  </span>
                 ) : (
                   <span
                     className="font-sans font-semibold"
@@ -299,7 +309,16 @@ export default function Contact() {
                   marginBottom: '0.5rem',
                 }}
               >
-                {t(contactFormText.nameLabel)}
+                {mode === 'bi' ? (
+                  <span style={{ display: 'inline-flex', flexDirection: 'column', lineHeight: 1.2 }}>
+                    <span>{contactFormText.nameLabel.zh}</span>
+                    <span style={{ fontSize: '12px', color: 'hsl(var(--secondary))', opacity: 0.85, marginTop: '2px', letterSpacing: '0.02em' }}>
+                      {contactFormText.nameLabel.en}
+                    </span>
+                  </span>
+                ) : (
+                  t(contactFormText.nameLabel)
+                )}
               </label>
               <input
                 id="contact-name"
@@ -341,7 +360,16 @@ export default function Contact() {
                   marginBottom: '0.5rem',
                 }}
               >
-                {t(contactFormText.phoneLabel)}
+                {mode === 'bi' ? (
+                  <span style={{ display: 'inline-flex', flexDirection: 'column', lineHeight: 1.2 }}>
+                    <span>{contactFormText.phoneLabel.zh}</span>
+                    <span style={{ fontSize: '12px', color: 'hsl(var(--secondary))', opacity: 0.85, marginTop: '2px', letterSpacing: '0.02em' }}>
+                      {contactFormText.phoneLabel.en}
+                    </span>
+                  </span>
+                ) : (
+                  t(contactFormText.phoneLabel)
+                )}
               </label>
               <input
                 id="contact-phone"
@@ -384,7 +412,16 @@ export default function Contact() {
                   marginBottom: '0.5rem',
                 }}
               >
-                {t(contactFormText.messageLabel)}
+                {mode === 'bi' ? (
+                  <span style={{ display: 'inline-flex', flexDirection: 'column', lineHeight: 1.2 }}>
+                    <span>{contactFormText.messageLabel.zh}</span>
+                    <span style={{ fontSize: '12px', color: 'hsl(var(--secondary))', opacity: 0.85, marginTop: '2px', letterSpacing: '0.02em' }}>
+                      {contactFormText.messageLabel.en}
+                    </span>
+                  </span>
+                ) : (
+                  t(contactFormText.messageLabel)
+                )}
               </label>
               <textarea
                 id="contact-message"
@@ -435,7 +472,16 @@ export default function Contact() {
               }}
             >
               <Send size={16} />
-              {t(contactFormText.submit)}
+              {mode === 'bi' ? (
+                <span style={{ display: 'inline-flex', flexDirection: 'column', lineHeight: 1.2, alignItems: 'center' }}>
+                  <span>{contactFormText.submit.zh}</span>
+                  <span style={{ fontSize: '11px', opacity: 0.85, marginTop: '1px', letterSpacing: '0.02em' }}>
+                    {contactFormText.submit.en}
+                  </span>
+                </span>
+              ) : (
+                <span>{t(contactFormText.submit)}</span>
+              )}
             </motion.button>
 
             <AnimatePresence>

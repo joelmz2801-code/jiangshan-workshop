@@ -3,15 +3,15 @@ import { Check, Globe } from 'lucide-react';
 import { useT, type LanguageMode } from '@/i18n/LanguageContext';
 
 const OPTIONS: { mode: LanguageMode; label: string; full: string }[] = [
-  { mode: 'bi', label: '中/EN', full: '双语' },
   { mode: 'zh', label: '中', full: '中文' },
   { mode: 'en', label: 'EN', full: 'English' },
 ];
 
 /**
  * 语言切换器
- * - 桌面端：三按钮分段选择器（中/EN/中/EN）
+ * - 桌面端：两按钮分段选择器（中 / EN）
  * - 移动端：抽屉内显示为纵向列表
+ * - 默认双语模式（bi）由 LanguageContext 控制，切换器仅提供纯中文/纯英文选项
  * - 当前选中项高亮，使用 primary 色背景
  */
 export default function LanguageSwitcher({ mobile = false }: { mobile?: boolean }) {
