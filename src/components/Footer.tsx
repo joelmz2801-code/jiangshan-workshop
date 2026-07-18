@@ -1,9 +1,13 @@
 import { site, footer } from '@/data/content';
+import { useT } from '@/i18n/LanguageContext';
 
 /**
  * 页脚 — 深色背景，品牌信息 + 社交链接 + 版权
+ * 支持多语言：双语模式下中文主+英文小字
  */
 export default function Footer() {
+  const { mode, t } = useT();
+
   return (
     <footer
       style={{
@@ -58,6 +62,9 @@ export default function Footer() {
               padding: '6px 14px',
               border: '1px solid hsl(var(--primary-foreground) / 0.4)',
               borderRadius: '999px',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '0.35rem',
             }}
             onMouseEnter={(e) => {
               e.currentTarget.style.opacity = '1';
@@ -70,11 +77,20 @@ export default function Footer() {
                 'hsl(var(--primary-foreground) / 0.4)';
             }}
           >
-            {footer.rednoteLabel}
+            {mode === 'bi' ? (
+              <>
+                <span>{footer.rednoteLabel.zh}</span>
+                <span style={{ fontSize: '11px', opacity: 0.85 }}>
+                  {footer.rednoteLabel.en}
+                </span>
+              </>
+            ) : (
+              <span>{t(footer.rednoteLabel)}</span>
+            )}
           </a>
         </div>
 
-        <p style={{ fontSize: '13px', opacity: 0.6 }}>{footer.copyright}</p>
+        <p style={{ fontSize: '13px', opacity: 0.6 }}>{t(footer.copyright)}</p>
       </div>
     </footer>
   );

@@ -1,9 +1,16 @@
 import { useState, type FormEvent } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MapPin, Phone, Mail, Send, CheckCircle2 } from 'lucide-react';
-import { contactInfo, sectionTitles, serviceAreas } from '@/data/content';
+import {
+  contactInfo,
+  sectionTitles,
+  serviceAreas,
+  serviceAreasTitle,
+  contactFormText,
+} from '@/data/content';
 import { fadeInUp, staggerContainer, staggerItem, viewportOnce } from '@/lib/motion';
 import SectionTitle from '@/components/SectionTitle';
+import { useT } from '@/i18n/LanguageContext';
 
 const iconMap = {
   'map-pin': MapPin,
@@ -27,10 +34,12 @@ const initialState: FormState = { name: '', phone: '', message: '' };
 
 /**
  * 联系我们区
- * - 左侧：地址/电话/邮箱
- * - 右侧：咨询表单（前端校验 + 成功提示）+ 地图占位
+ * - 左侧：WhatsApp/邮箱 + 服务区域
+ * - 右侧：咨询表单（前端校验 + 成功提示）
+ * 支持多语言：双语模式下中文主+英文小字
  */
 export default function Contact() {
+  const { mode, t } = useT();
   const [form, setForm] = useState<FormState>(initialState);
   const [errors, setErrors] = useState<FormErrors>({});
   const [submitted, setSubmitted] = useState(false);
@@ -38,17 +47,17 @@ export default function Contact() {
   const validate = (): FormErrors => {
     const e: FormErrors = {};
     if (!form.name.trim()) {
-      e.name = '请输入您的姓名';
+      e.name = t(contactFormText.nameError);
     }
     if (!form.phone.trim()) {
-      e.phone = '请输入联系电话';
+      e.phone = t(contactFormText.phoneError);
     } else if (!/^[\d\s+\-()]{6,20}$/.test(form.phone.trim())) {
-      e.phone = '电话格式不正确';
+      e.phone = t(contactFormText.phoneFormatError);
     }
     if (!form.message.trim()) {
-      e.message = '请输入您的需求';
+      e.message = t(contactFormText.messageError);
     } else if (form.message.trim().length < 5) {
-      e.message = '留言至少 5 个字';
+      e.message = t(contactFormText.messageShortError);
     }
     return e;
   };
@@ -148,7 +157,7 @@ export default function Contact() {
                         marginBottom: '0.25rem',
                       }}
                     >
-                      {item.label}
+                      {t(item.label)}
                     </span>
                     <span
                       style={{
@@ -180,16 +189,42 @@ export default function Contact() {
             >
               <div className="flex items-center justify-center" style={{ gap: '0.5rem' }}>
                 <MapPin size={18} style={{ color: 'hsl(var(--secondary))' }} />
-                <span
-                  className="font-sans font-semibold"
-                  style={{
-                    color: 'hsl(var(--foreground))',
-                    fontSize: '16px',
-                    letterSpacing: '0.02em',
-                  }}
-                >
-                  服务区域
-                </span>
+                {mode === 'bi' ? (
+                  <>
+                    <span
+                      className="font-sans font-semibold"
+                      style={{
+                        color: 'hsl(var(--foreground))',
+                        fontSize: '16px',
+                        letterSpacing: '0.02em',
+                      }}
+                    >
+                      {serviceAreasTitle.zh}
+                    </span>
+                    <span
+                      className="font-sans"
+                      style={{
+                        color: 'hsl(var(--secondary))',
+                        fontSize: '12px',
+                        marginLeft: '0.35rem',
+                        opacity: 0.85,
+                      }}
+                    >
+                      {serviceAreasTitle.en}
+                    </span>
+                  </>
+                ) : (
+                  <span
+                    className="font-sans font-semibold"
+                    style={{
+                      color: 'hsl(var(--foreground))',
+                      fontSize: '16px',
+                      letterSpacing: '0.02em',
+                    }}
+                  >
+                    {t(serviceAreasTitle)}
+                  </span>
+                )}
               </div>
               <div
                 className="flex flex-wrap items-center justify-center"
@@ -209,18 +244,33 @@ export default function Contact() {
                         lineHeight: 1.3,
                       }}
                     >
-                      {area.zh}
+                      {mode === 'en' ? area.en : area.zh}
                     </div>
-                    <div
-                      style={{
-                        color: 'hsl(var(--muted-foreground))',
-                        fontSize: '13px',
-                        marginTop: '0.25rem',
-                        letterSpacing: '0.02em',
-                      }}
-                    >
-                      {area.en}
-                    </div>
+                    {(mode === 'bi' || mode === 'en') && (
+                      <div
+                        style={{
+                          color: 'hsl(var(--muted-foreground))',
+                          fontSize: '13px',
+                          marginTop: '0.25rem',
+                          letterSpacing: '0.02em',
+                        }}
+                      >
+                        {area.en}
+                      </div>
+                    )}
+                    {mode === 'zh' && (
+                      <div
+                        style={{
+                          color: 'hsl(var(--muted-foreground))',
+                          fontSize: '13px',
+                          marginTop: '0.25rem',
+                          letterSpacing: '0.02em',
+                          visibility: 'hidden',
+                        }}
+                      >
+                        &nbsp;
+                      </div>
+                    )}
                   </div>
                 ))}
               </div>
@@ -249,14 +299,14 @@ export default function Contact() {
                   marginBottom: '0.5rem',
                 }}
               >
-                姓名
+                {t(contactFormText.nameLabel)}
               </label>
               <input
                 id="contact-name"
                 type="text"
                 value={form.name}
                 onChange={update('name')}
-                placeholder="您的称呼"
+                placeholder={t(contactFormText.namePlaceholder)}
                 aria-invalid={!!errors.name}
                 aria-describedby={errors.name ? 'err-name' : undefined}
                 style={{
@@ -291,7 +341,7 @@ export default function Contact() {
                   marginBottom: '0.5rem',
                 }}
               >
-                电话
+                {t(contactFormText.phoneLabel)}
               </label>
               <input
                 id="contact-phone"
@@ -299,7 +349,7 @@ export default function Contact() {
                 inputMode="tel"
                 value={form.phone}
                 onChange={update('phone')}
-                placeholder="便于我们联系您"
+                placeholder={t(contactFormText.phonePlaceholder)}
                 aria-invalid={!!errors.phone}
                 aria-describedby={errors.phone ? 'err-phone' : undefined}
                 style={{
@@ -334,13 +384,13 @@ export default function Contact() {
                   marginBottom: '0.5rem',
                 }}
               >
-                留言
+                {t(contactFormText.messageLabel)}
               </label>
               <textarea
                 id="contact-message"
                 value={form.message}
                 onChange={update('message')}
-                placeholder="简要描述您的修复需求"
+                placeholder={t(contactFormText.messagePlaceholder)}
                 rows={4}
                 aria-invalid={!!errors.message}
                 aria-describedby={errors.message ? 'err-message' : undefined}
@@ -385,7 +435,7 @@ export default function Contact() {
               }}
             >
               <Send size={16} />
-              提交咨询
+              {t(contactFormText.submit)}
             </motion.button>
 
             <AnimatePresence>
@@ -405,7 +455,7 @@ export default function Contact() {
                   }}
                 >
                   <CheckCircle2 size={18} />
-                  咨询已提交，我们会尽快与您联系。
+                  {t(contactFormText.success)}
                 </motion.div>
               )}
             </AnimatePresence>

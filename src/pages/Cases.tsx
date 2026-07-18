@@ -1,29 +1,47 @@
 import { motion } from 'framer-motion';
 import { ArrowLeft } from 'lucide-react';
-import { site } from '@/data/content';
+import { site, casesPageText } from '@/data/content';
 import { fadeInUp, staggerContainer, staggerItem, viewportOnce } from '@/lib/motion';
 import ThemeToggle from '@/components/ThemeToggle';
+import LanguageSwitcher from '@/components/LanguageSwitcher';
+import { useT } from '@/i18n/LanguageContext';
 
 /**
  * 真实案例页 — 展示修复前后的对比效果
  * 4 组对比：A / B / C / D（每组 1=修复前、2=修复后）
+ * 支持多语言：双语模式下中文主+英文小字
  */
 interface CaseGroup {
   id: string;
-  label: string;
   before: string;
   after: string;
-  desc: string;
 }
 
 const caseGroups: CaseGroup[] = [
-  { id: 'A', label: '案例 A', before: './assets/cases/A1.jpeg', after: './assets/cases/A2.jpeg', desc: '修复前后对比' },
-  { id: 'B', label: '案例 B', before: './assets/cases/B1.jpeg', after: './assets/cases/B2.jpeg', desc: '修复前后对比' },
-  { id: 'C', label: '案例 C', before: './assets/cases/C1.jpeg', after: './assets/cases/C2.jpeg', desc: '修复前后对比' },
-  { id: 'D', label: '案例 D', before: './assets/cases/D1.jpeg', after: './assets/cases/D2.jpeg', desc: '修复前后对比' },
+  { id: 'A', before: './assets/cases/A1.jpeg', after: './assets/cases/A2.jpeg' },
+  { id: 'B', before: './assets/cases/B1.jpeg', after: './assets/cases/B2.jpeg' },
+  { id: 'C', before: './assets/cases/C1.jpeg', after: './assets/cases/C2.jpeg' },
+  { id: 'D', before: './assets/cases/D1.jpeg', after: './assets/cases/D2.jpeg' },
 ];
 
 export default function Cases() {
+  const { mode, t } = useT();
+
+  /** 渲染双语文本（中文主+英文小字） */
+  const renderBi = (text: { zh: string; en: string }) => {
+    if (mode === 'bi') {
+      return (
+        <span style={{ display: 'inline-flex', flexDirection: 'column', lineHeight: 1.2 }}>
+          <span>{text.zh}</span>
+          <span style={{ fontSize: '0.7em', opacity: 0.8, marginTop: '0.15em' }}>
+            {text.en}
+          </span>
+        </span>
+      );
+    }
+    return <span>{t(text)}</span>;
+  };
+
   return (
     <div style={{ minHeight: '100vh', background: 'hsl(var(--background))' }}>
       {/* 顶部导航条 */}
@@ -52,27 +70,39 @@ export default function Cases() {
             }}
           >
             <ArrowLeft size={18} />
-            <span style={{ fontSize: '14px' }}>返回首页</span>
+            <span style={{ fontSize: '14px' }}>
+              {mode === 'bi' ? (
+                <span style={{ display: 'inline-flex', alignItems: 'baseline', gap: '0.35rem' }}>
+                  <span>{casesPageText.backHome.zh}</span>
+                  <span style={{ fontSize: '11px', opacity: 0.65 }}>{casesPageText.backHome.en}</span>
+                </span>
+              ) : (
+                t(casesPageText.backHome)
+              )}
+            </span>
           </a>
 
-          <div className="flex items-center" style={{ gap: '0.5rem' }}>
-            <img
-              src="/assets/logo.svg"
-              alt=""
-              aria-hidden="true"
-              className="h-5 w-5"
-              style={{ color: 'hsl(var(--foreground))' }}
-            />
-            <span
-              className="font-sans font-semibold"
-              style={{
-                color: 'hsl(var(--foreground))',
-                fontSize: '20px',
-                letterSpacing: '0.02em',
-              }}
-            >
-              {site.name}
-            </span>
+          <div className="flex items-center" style={{ gap: '1.25rem' }}>
+            <LanguageSwitcher />
+            <div className="flex items-center" style={{ gap: '0.5rem' }}>
+              <img
+                src="/assets/logo.svg"
+                alt=""
+                aria-hidden="true"
+                className="h-5 w-5"
+                style={{ color: 'hsl(var(--foreground))' }}
+              />
+              <span
+                className="font-sans font-semibold"
+                style={{
+                  color: 'hsl(var(--foreground))',
+                  fontSize: '20px',
+                  letterSpacing: '0.02em',
+                }}
+              >
+                {site.name}
+              </span>
+            </div>
           </div>
         </div>
       </header>
@@ -88,18 +118,49 @@ export default function Cases() {
             viewport={viewportOnce}
             className="text-center"
           >
-            <h1
-              className="font-sans"
-              style={{
-                color: 'hsl(var(--foreground))',
-                fontSize: 'clamp(32px, 4vw, 48px)',
-                fontWeight: 600,
-                letterSpacing: '-0.02em',
-                lineHeight: 1.2,
-              }}
-            >
-              真实案例
-            </h1>
+            {mode === 'bi' ? (
+              <>
+                <h1
+                  className="font-sans"
+                  style={{
+                    color: 'hsl(var(--foreground))',
+                    fontSize: 'clamp(32px, 4vw, 48px)',
+                    fontWeight: 600,
+                    letterSpacing: '-0.02em',
+                    lineHeight: 1.2,
+                    margin: 0,
+                  }}
+                >
+                  {casesPageText.title.zh}
+                </h1>
+                <p
+                  className="font-sans"
+                  style={{
+                    color: 'hsl(var(--secondary))',
+                    fontSize: 'clamp(14px, 1.3vw, 17px)',
+                    opacity: 0.85,
+                    marginTop: '0.4rem',
+                    letterSpacing: '0.02em',
+                  }}
+                >
+                  {casesPageText.title.en}
+                </p>
+              </>
+            ) : (
+              <h1
+                className="font-sans"
+                style={{
+                  color: 'hsl(var(--foreground))',
+                  fontSize: 'clamp(32px, 4vw, 48px)',
+                  fontWeight: 600,
+                  letterSpacing: '-0.02em',
+                  lineHeight: 1.2,
+                  margin: 0,
+                }}
+              >
+                {t(casesPageText.title)}
+              </h1>
+            )}
             <p
               style={{
                 color: 'hsl(var(--muted-foreground))',
@@ -108,7 +169,7 @@ export default function Cases() {
                 lineHeight: 1.7,
               }}
             >
-              修复前后的真实对比，匠心效果一目了然
+              {t(casesPageText.subtitle)}
             </p>
           </motion.div>
 
@@ -147,7 +208,7 @@ export default function Cases() {
                   >
                     <img
                       src={group.before}
-                      alt={`${group.label} 修复前`}
+                      alt={`${t(casesPageText.caseLabel)} ${group.id} ${t(casesPageText.before)}`}
                       loading="lazy"
                       className="h-full w-full object-cover"
                       style={{ minHeight: '280px' }}
@@ -166,7 +227,7 @@ export default function Cases() {
                         letterSpacing: '0.02em',
                       }}
                     >
-                      之前
+                      {t(casesPageText.before)}
                     </span>
                   </div>
                   {/* 之后 */}
@@ -176,7 +237,7 @@ export default function Cases() {
                   >
                     <img
                       src={group.after}
-                      alt={`${group.label} 修复后`}
+                      alt={`${t(casesPageText.caseLabel)} ${group.id} ${t(casesPageText.after)}`}
                       loading="lazy"
                       className="h-full w-full object-cover"
                       style={{ minHeight: '280px' }}
@@ -195,7 +256,7 @@ export default function Cases() {
                         letterSpacing: '0.02em',
                       }}
                     >
-                      之后
+                      {t(casesPageText.after)}
                     </span>
                   </div>
                 </div>
@@ -211,7 +272,14 @@ export default function Cases() {
                       fontWeight: 600,
                     }}
                   >
-                    {group.label}
+                    {mode === 'bi' ? (
+                      <span style={{ display: 'inline-flex', alignItems: 'baseline', gap: '0.35rem' }}>
+                        <span>{casesPageText.caseLabel.zh} {group.id}</span>
+                        <span style={{ fontSize: '11px', opacity: 0.65 }}>{casesPageText.caseLabel.en} {group.id}</span>
+                      </span>
+                    ) : (
+                      <span>{t(casesPageText.caseLabel)} {group.id}</span>
+                    )}
                   </span>
                   <span
                     style={{
@@ -219,7 +287,7 @@ export default function Cases() {
                       fontSize: '13px',
                     }}
                   >
-                    {group.desc}
+                    {t(casesPageText.desc)}
                   </span>
                 </div>
               </motion.div>

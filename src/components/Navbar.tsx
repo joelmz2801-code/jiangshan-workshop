@@ -1,15 +1,19 @@
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
-import { navLinks, site } from '@/data/content';
+import { navLinks, site, casesNavLabel, menuLabels } from '@/data/content';
+import { useT } from '@/i18n/LanguageContext';
+import LanguageSwitcher from '@/components/LanguageSwitcher';
 
 /**
  * 导航栏
- * - 桌面：Logo + 横向链接
+ * - 桌面：Logo + 横向链接 + 语言切换器
  * - 移动端：汉堡按钮 → 全屏抽屉菜单
  * - 固定顶部、毛玻璃背景
+ * 支持多语言：双语模式下中文主+英文小字
  */
 export default function Navbar() {
+  const { mode, t } = useT();
   const [mobileOpen, setMobileOpen] = useState(false);
 
   // 移动菜单打开时锁定 body 滚动
@@ -35,6 +39,21 @@ export default function Navbar() {
   }, [mobileOpen]);
 
   const handleNavClick = () => setMobileOpen(false);
+
+  /** 渲染导航链接文本（双语模式中文主+英文小字） */
+  const renderNavLabel = (text: { zh: string; en: string }) => {
+    if (mode === 'bi') {
+      return (
+        <span style={{ display: 'inline-flex', alignItems: 'baseline', gap: '0.35rem' }}>
+          <span>{text.zh}</span>
+          <span style={{ fontSize: '11px', opacity: 0.65, letterSpacing: '0.02em' }}>
+            {text.en}
+          </span>
+        </span>
+      );
+    }
+    return <span>{t(text)}</span>;
+  };
 
   return (
     <nav
@@ -77,7 +96,7 @@ export default function Navbar() {
         </a>
 
         {/* 桌面导航 */}
-        <div className="hidden md:flex items-center" style={{ gap: '2.5rem' }}>
+        <div className="hidden md:flex items-center" style={{ gap: '2rem' }}>
           {navLinks.map((link) => (
             <a
               key={link.href}
@@ -95,7 +114,7 @@ export default function Navbar() {
                 e.currentTarget.style.color = 'hsl(var(--muted-foreground))';
               }}
             >
-              {link.label}
+              {renderNavLabel(link.label)}
             </a>
           ))}
           {/* 真实案例 — 新窗口打开 */}
@@ -116,15 +135,18 @@ export default function Navbar() {
               e.currentTarget.style.color = 'hsl(var(--muted-foreground))';
             }}
           >
-            真实案例
+            {renderNavLabel(casesNavLabel)}
           </a>
+
+          {/* 语言切换器 */}
+          <LanguageSwitcher />
         </div>
 
         {/* 移动端汉堡按钮 */}
         <button
           type="button"
           className="md:hidden flex h-10 w-10 items-center justify-center rounded-md"
-          aria-label={mobileOpen ? '关闭菜单' : '打开菜单'}
+          aria-label={mobileOpen ? t(menuLabels.close) : t(menuLabels.open)}
           aria-expanded={mobileOpen}
           onClick={() => setMobileOpen((v) => !v)}
           style={{ color: 'hsl(var(--foreground))' }}
@@ -169,7 +191,7 @@ export default function Navbar() {
                     e.currentTarget.style.background = 'transparent';
                   }}
                 >
-                  {link.label}
+                  {renderNavLabel(link.label)}
                 </a>
               ))}
               {/* 真实案例 — 新窗口打开 */}
@@ -191,8 +213,13 @@ export default function Navbar() {
                   e.currentTarget.style.background = 'transparent';
                 }}
               >
-                真实案例
+                {renderNavLabel(casesNavLabel)}
               </a>
+
+              {/* 移动端语言切换器（纵向列表） */}
+              <div style={{ borderTop: '1px solid hsl(var(--border))', marginTop: '0.5rem', paddingTop: '0.25rem' }}>
+                <LanguageSwitcher mobile />
+              </div>
             </div>
           </motion.div>
         )}

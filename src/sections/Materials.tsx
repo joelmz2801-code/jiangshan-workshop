@@ -2,14 +2,18 @@ import { motion } from 'framer-motion';
 import { materials, sectionTitles } from '@/data/content';
 import { staggerContainer, staggerItem, viewportOnce } from '@/lib/motion';
 import SectionTitle from '@/components/SectionTitle';
+import { useT } from '@/i18n/LanguageContext';
 
 /**
  * 材质展示区
  * - 浅米灰背景
  * - 3 列网格（移动端 2 列）
  * - 图片高度响应式 clamp，确保 snap 整页模式下内容完整展示
+ * 支持多语言：双语模式下中文主+英文小字
  */
 export default function Materials() {
+  const { mode, t } = useT();
+
   return (
     <section
       id="materials"
@@ -53,7 +57,7 @@ export default function Materials() {
               >
                 <img
                   src={material.image}
-                  alt={material.imageAlt}
+                  alt={t(material.imageAlt)}
                   loading="lazy"
                   className="h-full w-full object-cover transition-transform duration-500 ease-out"
                   onMouseEnter={(e) => {
@@ -72,15 +76,42 @@ export default function Materials() {
                   textAlign: 'center',
                 }}
               >
-                <span
-                  className="font-sans font-semibold"
-                  style={{
-                    color: 'hsl(var(--foreground))',
-                    fontSize: '15px',
-                  }}
-                >
-                  {material.name}
-                </span>
+                {mode === 'bi' ? (
+                  <>
+                    <span
+                      className="font-sans font-semibold"
+                      style={{
+                        color: 'hsl(var(--foreground))',
+                        fontSize: '15px',
+                        display: 'block',
+                      }}
+                    >
+                      {material.name.zh}
+                    </span>
+                    <span
+                      className="font-sans"
+                      style={{
+                        color: 'hsl(var(--secondary))',
+                        fontSize: '12px',
+                        display: 'block',
+                        marginTop: '0.15rem',
+                        opacity: 0.85,
+                      }}
+                    >
+                      {material.name.en}
+                    </span>
+                  </>
+                ) : (
+                  <span
+                    className="font-sans font-semibold"
+                    style={{
+                      color: 'hsl(var(--foreground))',
+                      fontSize: '15px',
+                    }}
+                  >
+                    {t(material.name)}
+                  </span>
+                )}
               </div>
             </motion.article>
           ))}

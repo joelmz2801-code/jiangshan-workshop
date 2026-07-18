@@ -1,14 +1,18 @@
 import { motion } from 'framer-motion';
-import { hero } from '@/data/content';
+import { hero, scrollDownLabel } from '@/data/content';
 import { fadeInUp, viewportOnce } from '@/lib/motion';
+import { useT } from '@/i18n/LanguageContext';
 
 /**
  * Hero 首屏区
  * - 全屏背景图 + 深色渐变遮罩
  * - 居中标题/副标题/CTA
  * - 底部弹跳的向下滚动指示器
+ * 支持多语言：双语模式下中文主+英文小字
  */
 export default function Hero() {
+  const { mode, t } = useT();
+
   return (
     <section
       id="hero"
@@ -18,7 +22,7 @@ export default function Hero() {
       {/* 背景图 */}
       <img
         src={hero.image}
-        alt={hero.imageAlt}
+        alt={t(hero.imageAlt)}
         // @ts-expect-error — React 18 使用小写 fetchpriority，类型定义可能未更新
         fetchpriority="high"
         className="absolute inset-0 h-full w-full object-cover"
@@ -42,35 +46,85 @@ export default function Hero() {
         className="relative z-10 flex flex-col items-center justify-center px-6 text-center"
         style={{ minHeight: '100vh' }}
       >
-        <motion.h1
-          variants={fadeInUp}
-          style={{
-            color: 'hsl(var(--primary-foreground))',
-            fontFamily: 'var(--font-sans)',
-            fontSize: 'clamp(32px, 5vw, 60px)',
-            fontWeight: 600,
-            lineHeight: 1.18,
-            letterSpacing: '-0.02em',
-            textWrap: 'balance',
-            wordBreak: 'keep-all',
-            maxWidth: '680px',
-          }}
-        >
-          {hero.title}
-        </motion.h1>
-
-        <motion.p
-          variants={fadeInUp}
-          style={{
-            color: 'hsl(var(--primary-foreground) / 0.85)',
-            fontSize: 'clamp(16px, 1.6vw, 20px)',
-            lineHeight: 1.7,
-            maxWidth: '520px',
-            marginTop: '1.5rem',
-          }}
-        >
-          {hero.subtitle}
-        </motion.p>
+        {mode === 'bi' ? (
+          <>
+            <motion.h1
+              variants={fadeInUp}
+              style={{
+                color: 'hsl(var(--primary-foreground))',
+                fontFamily: 'var(--font-sans)',
+                fontSize: 'clamp(32px, 5vw, 60px)',
+                fontWeight: 600,
+                lineHeight: 1.18,
+                letterSpacing: '-0.02em',
+                textWrap: 'balance',
+                wordBreak: 'keep-all',
+                maxWidth: '680px',
+                margin: 0,
+              }}
+            >
+              {hero.title.zh}
+            </motion.h1>
+            <motion.p
+              variants={fadeInUp}
+              style={{
+                color: 'hsl(var(--primary-foreground) / 0.7)',
+                fontSize: 'clamp(14px, 1.4vw, 18px)',
+                lineHeight: 1.5,
+                letterSpacing: '0.02em',
+                maxWidth: '620px',
+                marginTop: '0.75rem',
+                margin: 0,
+              }}
+            >
+              {hero.title.en}
+            </motion.p>
+            <motion.p
+              variants={fadeInUp}
+              style={{
+                color: 'hsl(var(--primary-foreground) / 0.85)',
+                fontSize: 'clamp(15px, 1.5vw, 19px)',
+                lineHeight: 1.7,
+                maxWidth: '520px',
+                marginTop: '1.5rem',
+              }}
+            >
+              {hero.subtitle.zh}
+            </motion.p>
+          </>
+        ) : (
+          <>
+            <motion.h1
+              variants={fadeInUp}
+              style={{
+                color: 'hsl(var(--primary-foreground))',
+                fontFamily: 'var(--font-sans)',
+                fontSize: 'clamp(32px, 5vw, 60px)',
+                fontWeight: 600,
+                lineHeight: 1.18,
+                letterSpacing: '-0.02em',
+                textWrap: 'balance',
+                wordBreak: 'keep-all',
+                maxWidth: '680px',
+                margin: 0,
+              }}
+            >
+              {t(hero.title)}
+            </motion.h1>
+            <motion.p
+              variants={fadeInUp}
+              style={{
+                color: 'hsl(var(--primary-foreground) / 0.85)',
+                fontSize: 'clamp(16px, 1.6vw, 20px)',
+                lineHeight: 1.7,
+                maxWidth: '520px',
+                marginTop: '1.5rem',
+              }}
+            >
+              {t(hero.subtitle)}
+            </motion.p>
+          </>
+        )}
 
         <motion.a
           variants={fadeInUp}
@@ -90,13 +144,13 @@ export default function Hero() {
             cursor: 'pointer',
           }}
         >
-          {hero.ctaText}
+          {t(hero.ctaText)}
         </motion.a>
 
         {/* 向下滚动指示器 */}
         <a
           href="#services"
-          aria-label="向下滚动"
+          aria-label={t(scrollDownLabel)}
           className="absolute bottom-8 left-1/2"
           style={{
             transform: 'translateX(-50%)',
