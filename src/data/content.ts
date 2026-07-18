@@ -6,8 +6,8 @@
 import type { LocalizedText } from '@/i18n/LanguageContext';
 
 export const site = {
-  name: 'KLB工坊',
-  nameEn: 'KLB Workshop',
+  name: 'KLB瓷砖家具美容',
+  nameEn: 'KLB Tile & Furniture Beauty',
   slogan: {
     zh: '匠心修补，浑然天成',
     en: 'Craftsman Repair, Seamless Restoration',
@@ -180,7 +180,7 @@ export const contactInfo: ContactItem[] = [
   {
     key: 'rednote',
     label: { zh: '小红书', en: 'RedNote' },
-    value: 'KLB工坊',
+    value: 'KLB瓷砖家具美容',
     icon: 'link',
     href: 'https://www.rednote.com/user/profile/61ab537d000000001000d825?xsec_token=ABRc08PgYdAsJkKuCcJMuqOzCz7IOoGQubA6jObn8w90I=&xsec_source=pc_note',
   },
@@ -208,8 +208,8 @@ export const contactFormText = {
 
 export const footer = {
   copyright: {
-    zh: `© ${new Date().getFullYear()} KLB工坊. 保留所有权利.`,
-    en: `© ${new Date().getFullYear()} KLB Workshop. All rights reserved.`,
+    zh: `© ${new Date().getFullYear()} KLB瓷砖家具美容. 保留所有权利.`,
+    en: `© ${new Date().getFullYear()} KLB Tile & Furniture Beauty. All rights reserved.`,
   } as LocalizedText,
 } as const;
 

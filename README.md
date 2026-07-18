@@ -1,4 +1,4 @@
-# KLB工坊官网
+# KLB瓷砖家具美容官网
 
 基于设计稿还原的工艺修补工作室展示型官网，采用 Vite + React + TypeScript + TailwindCSS 构建，支持亮/暗主题、多端适配，并预配置 GitHub Pages 与 Cloudflare Pages 双部署方案。
 
