@@ -72,9 +72,9 @@ export default function Cases() {
             <ArrowLeft size={18} />
             <span style={{ fontSize: '14px' }}>
               {mode === 'bi' ? (
-                <span style={{ display: 'inline-flex', alignItems: 'baseline', gap: '0.35rem' }}>
+                <span style={{ display: 'inline-flex', flexDirection: 'column', lineHeight: 1.2, alignItems: 'flex-start' }}>
                   <span>{casesPageText.backHome.zh}</span>
-                  <span style={{ fontSize: '11px', opacity: 0.65 }}>{casesPageText.backHome.en}</span>
+                  <span style={{ fontSize: '11px', opacity: 0.65, marginTop: '2px' }}>{casesPageText.backHome.en}</span>
                 </span>
               ) : (
                 t(casesPageText.backHome)

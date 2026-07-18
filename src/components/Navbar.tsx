@@ -40,13 +40,13 @@ export default function Navbar() {
 
   const handleNavClick = () => setMobileOpen(false);
 
-  /** 渲染导航链接文本（双语模式中文主+英文小字） */
+  /** 渲染导航链接文本（双语模式中文上+英文下） */
   const renderNavLabel = (text: { zh: string; en: string }) => {
     if (mode === 'bi') {
       return (
-        <span style={{ display: 'inline-flex', alignItems: 'baseline', gap: '0.35rem' }}>
+        <span style={{ display: 'inline-flex', flexDirection: 'column', lineHeight: 1.2, alignItems: 'center' }}>
           <span>{text.zh}</span>
-          <span style={{ fontSize: '11px', opacity: 0.65, letterSpacing: '0.02em' }}>
+          <span style={{ fontSize: '11px', opacity: 0.65, letterSpacing: '0.02em', marginTop: '2px' }}>
             {text.en}
           </span>
         </span>
