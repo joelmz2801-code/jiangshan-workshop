@@ -4,6 +4,7 @@ import { Menu, X } from 'lucide-react';
 import { navLinks, site, casesNavLabel, menuLabels } from '@/data/content';
 import { useT } from '@/i18n/LanguageContext';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
+import { scrollToAnchor } from '@/lib/utils';
 
 /**
  * 导航栏
@@ -37,6 +38,14 @@ export default function Navbar() {
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
   }, [mobileOpen]);
+
+  /** 点击本页锚点链接 — 关闭移动菜单 + JS 平滑滚动（绕过 snap 卡死） */
+  const handleAnchorClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (!href.startsWith('#')) return;
+    e.preventDefault();
+    setMobileOpen(false);
+    scrollToAnchor(href);
+  };
 
   const handleNavClick = () => setMobileOpen(false);
 
@@ -101,6 +110,7 @@ export default function Navbar() {
             <a
               key={link.href}
               href={link.href}
+              onClick={(e) => handleAnchorClick(e, link.href)}
               className="nav-link transition-colors duration-200"
               style={{
                 color: 'hsl(var(--muted-foreground))',
@@ -177,7 +187,7 @@ export default function Navbar() {
                 <a
                   key={link.href}
                   href={link.href}
-                  onClick={handleNavClick}
+                  onClick={(e) => handleAnchorClick(e, link.href)}
                   className="block rounded-md px-3 py-3 transition-colors duration-200"
                   style={{
                     color: 'hsl(var(--foreground))',
