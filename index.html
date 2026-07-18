@@ -40,24 +40,6 @@
       rel="stylesheet"
     />
 
-    <!-- 主题初始化（避免 FOUC） -->
-    <script>
-      (function () {
-        try {
-          var saved = localStorage.getItem('theme');
-          var isMobile = window.matchMedia('(max-width: 768px)').matches;
-          var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-          // 移动端未保存偏好时默认亮色；桌面端跟随系统偏好
-          var theme = saved || (isMobile ? 'light' : (prefersDark ? 'dark' : 'light'));
-          var root = document.documentElement;
-          root.classList.remove('light', 'dark');
-          root.classList.add(theme);
-        } catch (e) {
-          document.documentElement.classList.add('light');
-        }
-      })();
-    </script>
-
     <!-- 刷新时强制回到页面顶部（Hero 区） -->
     <script>
       (function () {

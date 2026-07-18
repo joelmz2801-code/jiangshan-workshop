@@ -42,33 +42,6 @@
   --tracking-normal: 0.01em;
 }
 
-/* 设计稿主题变量 — 暗色模式 */
-.dark {
-  --background: 12 71.4286% 1.3725%;
-  --card: 12 71.4286% 1.3725%;
-  --popover: 12 71.4286% 1.3725%;
-
-  --foreground: 41.5385 18.8406% 86.4706%;
-  --card-foreground: 41.5385 18.8406% 86.4706%;
-  --popover-foreground: 41.5385 18.8406% 86.4706%;
-  --muted-foreground: 35 15% 60%;
-
-  --primary: 41.5385 18.8406% 86.4706%;
-  --primary-foreground: 12 71.4286% 1.3725%;
-  --secondary: 35 25% 30%;
-  --secondary-foreground: 41.5385 18.8406% 86.4706%;
-  --muted: 35 15% 20%;
-  --accent: 35 25% 40%;
-  --accent-foreground: 41.5385 18.8406% 86.4706%;
-
-  --destructive: 0 84.2% 60.2%;
-  --destructive-foreground: 0 0% 98%;
-
-  --border: 42.8571 8.4337% 16.2745%;
-  --input: 35 15% 20%;
-  --ring: 35.4545 29.7297% 70.9804%;
-}
-
 @layer base {
   html {
     /* 锚点跳转平滑（导航栏点击） */

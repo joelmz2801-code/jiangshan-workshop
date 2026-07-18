@@ -2,7 +2,6 @@ import { motion } from 'framer-motion';
 import { ArrowLeft } from 'lucide-react';
 import { site, casesPageText } from '@/data/content';
 import { fadeInUp, staggerContainer, staggerItem, viewportOnce } from '@/lib/motion';
-import ThemeToggle from '@/components/ThemeToggle';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
 import { useT } from '@/i18n/LanguageContext';
 
@@ -295,8 +294,6 @@ export default function Cases() {
           </motion.div>
         </div>
       </main>
-
-      <ThemeToggle />
     </div>
   );
 }
