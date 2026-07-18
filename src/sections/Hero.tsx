@@ -2,7 +2,6 @@ import { motion } from 'framer-motion';
 import { hero, scrollDownLabel } from '@/data/content';
 import { fadeInUp, viewportOnce } from '@/lib/motion';
 import { useT } from '@/i18n/LanguageContext';
-import { scrollToAnchor } from '@/lib/utils';
 
 /**
  * Hero 首屏区
@@ -10,21 +9,10 @@ import { scrollToAnchor } from '@/lib/utils';
  * - 居中标题/副标题/CTA
  * - 底部弹跳的向下滚动指示器
  * 支持多语言：双语模式下中文主+英文小字
+ * 锚点点击由 useSmoothScroll 的全局监听器统一处理
  */
 export default function Hero() {
   const { mode, t } = useT();
-
-  /** 点击锚点 — JS 平滑滚动（绕过移动端 snap 卡死） */
-  const onAnchorClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    if (!href.startsWith('#')) return;
-    e.preventDefault();
-    // 双 rAF 延迟，确保 DOM 状态稳定
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        scrollToAnchor(href);
-      });
-    });
-  };
 
   return (
     <section
@@ -142,7 +130,6 @@ export default function Hero() {
         <motion.a
           variants={fadeInUp}
           href={hero.ctaHref}
-          onClick={(e) => onAnchorClick(e, hero.ctaHref)}
           className="hero-cta inline-flex items-center justify-center no-underline"
           whileHover={{ y: -1, filter: 'brightness(1.08)' }}
           whileTap={{ scale: 0.98, filter: 'brightness(0.96)' }}
@@ -173,7 +160,6 @@ export default function Hero() {
         {/* 向下滚动指示器 */}
         <a
           href="#services"
-          onClick={(e) => onAnchorClick(e, '#services')}
           aria-label={t(scrollDownLabel)}
           className="absolute bottom-8 left-1/2"
           style={{

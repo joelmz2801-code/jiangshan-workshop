@@ -1,9 +1,10 @@
 import { useEffect, useRef } from 'react';
+import { scrollToAnchor } from '@/lib/utils';
 
 /**
  * 平滑滚动 hook — 桌面端接管 wheel/键盘滚动
  * 用 easeInOutCubic 缓动曲线实现减速缓冲，一滚跳一页
- * 移动端不接管（由 CSS scroll-snap 处理）
+ * 移动端不接管 wheel（由 CSS scroll-snap 处理），但仍拦截锚点点击
  */
 
 // easeInOutCubic 缓动：两端慢、中间快，过渡自然流畅
@@ -22,8 +23,32 @@ export function useSmoothScroll() {
   const isAnimating = useRef(false);
   const cooldownTimer = useRef<number | null>(null);
 
+  // 锚点点击拦截 — 所有设备生效（桌面+移动），不依赖 React onClick
+  // 用原生 document 监听器，避免抽屉菜单退出动画期间 React 事件失效
   useEffect(() => {
-    // 仅桌面端（精细指针）且未偏好减少动画时接管
+    const handleAnchorClick = (e: MouseEvent) => {
+      // 只处理左键点击
+      if (e.button !== 0) return;
+      // 找到最近的 a[href^="#"] 祖先
+      const target = e.target as HTMLElement;
+      const anchor = target.closest('a[href^="#"]') as HTMLAnchorElement | null;
+      if (!anchor) return;
+      const href = anchor.getAttribute('href');
+      if (!href || href === '#' || !href.startsWith('#')) return;
+      // 跳过新窗口/新标签打开的链接
+      if (anchor.target === '_blank') return;
+      // 确认目标元素存在
+      if (!document.querySelector(href)) return;
+      e.preventDefault();
+      scrollToAnchor(href);
+    };
+    // 用 capture 阶段，确保最早拦截
+    document.addEventListener('click', handleAnchorClick, true);
+    return () => document.removeEventListener('click', handleAnchorClick, true);
+  }, []);
+
+  useEffect(() => {
+    // 仅桌面端（精细指针）且未偏好减少动画时接管 wheel/键盘
     const isFinePointer = window.matchMedia('(pointer: fine)').matches;
     const prefersReducedMotion = window.matchMedia(
       '(prefers-reduced-motion: reduce)',

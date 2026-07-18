@@ -4,7 +4,6 @@ import { Menu, X } from 'lucide-react';
 import { navLinks, site, casesNavLabel, menuLabels } from '@/data/content';
 import { useT } from '@/i18n/LanguageContext';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
-import { scrollToAnchor } from '@/lib/utils';
 
 /**
  * 导航栏
@@ -39,17 +38,12 @@ export default function Navbar() {
     return () => window.removeEventListener('keydown', onKey);
   }, [mobileOpen]);
 
-  /** 点击本页锚点链接 — 关闭移动菜单 + JS 平滑滚动（绕过 snap 卡死） */
+  /** 点击本页锚点链接 — 关闭移动菜单（滚动由 useSmoothScroll 的全局监听器处理） */
   const handleAnchorClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     if (!href.startsWith('#')) return;
-    e.preventDefault();
+    // 不 preventDefault，让全局监听器统一处理滚动
+    // 这里只需关闭移动菜单
     setMobileOpen(false);
-    // 双 rAF 延迟：等 React 重渲染 + useEffect 完成，确保 body.overflow 已恢复
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        scrollToAnchor(href);
-      });
-    });
   };
 
   const handleNavClick = () => setMobileOpen(false);
