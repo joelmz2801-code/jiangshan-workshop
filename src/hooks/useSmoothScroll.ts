@@ -11,9 +11,10 @@ const easeInOutCubic = (t: number): number =>
   t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
 
 // 动画时长（ms）— 控制减速缓冲的持续时间
-const DURATION = 850;
+// 调到 600ms：既有减速缓冲感，又不会因过慢产生阻力感
+const DURATION = 600;
 // wheel 冷却期（ms）— 动画结束后短暂忽略惯性滚动
-const COOLDOWN = 200;
+const COOLDOWN = 140;
 // wheel 最小触发阈值 — 忽略微小滚动
 const WHEEL_THRESHOLD = 5;
 

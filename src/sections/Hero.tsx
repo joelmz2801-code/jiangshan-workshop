@@ -144,7 +144,16 @@ export default function Hero() {
             cursor: 'pointer',
           }}
         >
-          {t(hero.ctaText)}
+          {mode === 'bi' ? (
+            <span style={{ display: 'inline-flex', flexDirection: 'column', lineHeight: 1.2, alignItems: 'center' }}>
+              <span>{hero.ctaText.zh}</span>
+              <span style={{ fontSize: '11px', opacity: 0.75, marginTop: '2px', letterSpacing: '0.02em', fontWeight: 500 }}>
+                {hero.ctaText.en}
+              </span>
+            </span>
+          ) : (
+            <span>{t(hero.ctaText)}</span>
+          )}
         </motion.a>
 
         {/* 向下滚动指示器 */}

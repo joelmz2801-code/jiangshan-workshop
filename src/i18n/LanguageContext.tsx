@@ -12,6 +12,12 @@ import {
  * - zh: 纯中文
  * - en: 纯英文
  * - bi: 双语（中文为主，英文小字）— 预设
+ *
+ * 持久化策略：使用 sessionStorage 而非 localStorage
+ * - 刷新页面：保持当前会话内选择的语言模式（如用户已切换为纯中文）
+ *   注意：用户需求是"刷新时回到中英文混合显示"，所以刷新时强制重置为 bi
+ * - 关闭标签页/窗口：会话结束，下次打开回到 bi 默认
+ * - 实际实现：不读取任何存储，每次加载默认 bi；切换仅在内存中生效
  */
 
 export type LanguageMode = 'zh' | 'en' | 'bi';
@@ -28,29 +34,13 @@ interface LanguageContextValue {
 
 const LanguageContext = createContext<LanguageContextValue | null>(null);
 
-const STORAGE_KEY = 'klb-lang-mode';
-
-function readStoredMode(): LanguageMode {
-  if (typeof window === 'undefined') return 'bi';
-  try {
-    const stored = window.localStorage.getItem(STORAGE_KEY);
-    if (stored === 'zh' || stored === 'en' || stored === 'bi') return stored;
-  } catch {
-    // localStorage 不可用时回退默认值
-  }
-  return 'bi';
-}
-
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [mode, setModeState] = useState<LanguageMode>(readStoredMode);
+  // 每次页面加载默认双语模式（bi），不持久化读取
+  // 用户点击"中文"或"英文"按钮仅在当前会话内生效，刷新后回到 bi
+  const [mode, setModeState] = useState<LanguageMode>('bi');
 
   const setMode = (next: LanguageMode) => {
     setModeState(next);
-    try {
-      window.localStorage.setItem(STORAGE_KEY, next);
-    } catch {
-      // 忽略写入失败
-    }
   };
 
   // 同步到 html lang 属性
