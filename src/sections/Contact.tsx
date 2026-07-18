@@ -150,23 +150,16 @@ export default function Contact() {
                   <div>
                     <span
                       style={{
-                        color: 'hsl(var(--foreground))',
+                        // 双语模式下 WhatsApp/邮箱 label 只显示英文（金色字体），避免中英文重复
+                        color: mode === 'bi' ? 'hsl(var(--secondary))' : 'hsl(var(--foreground))',
                         fontSize: '15px',
                         fontWeight: 600,
                         display: 'block',
                         marginBottom: '0.25rem',
+                        letterSpacing: '0.02em',
                       }}
                     >
-                      {mode === 'bi' ? (
-                        <span style={{ display: 'inline-flex', flexDirection: 'column', lineHeight: 1.2 }}>
-                          <span>{item.label.zh}</span>
-                          <span style={{ fontSize: '12px', color: 'hsl(var(--secondary))', opacity: 0.85, marginTop: '2px', letterSpacing: '0.02em' }}>
-                            {item.label.en}
-                          </span>
-                        </span>
-                      ) : (
-                        t(item.label)
-                      )}
+                      {mode === 'bi' ? item.label.en : t(item.label)}
                     </span>
                     <span
                       style={{

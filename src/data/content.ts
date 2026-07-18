@@ -140,7 +140,7 @@ export const sectionTitles = {
     title: { zh: '擅长材质', en: 'Materials We Master' },
     subtitle: {
       zh: '精通多种材质的修复与调色工艺',
-      en: 'Expert repair and color matching across various materials',
+      en: 'Expert repair & color craft',
     },
   },
   contact: {
