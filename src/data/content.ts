@@ -69,7 +69,7 @@ export const services: ServiceItem[] = [
     title: { zh: '补洞修复', en: 'Hole Repair' },
     description: {
       zh: '专注木质、大理石等各类材质的孔洞修复。采用专业填充材料与精密工艺，修复后表面平整光滑，与原有材质浑然一体，不留痕迹。无论是装修遗留的钉孔、意外磕碰，还是岁月侵蚀的破损，都能恢复如初。',
-      en: 'Specialized in hole repair for wood, marble, and various materials. Using professional fillers and precise techniques, the repaired surface is smooth and seamlessly blends with the original material. From renovation nail holes to accidental dents and age-related damage, all can be restored to original condition.',
+      en: 'Expert repair for wood, marble, and tiles — nail holes, dents, and damage restored seamlessly.',
     },
     image: '/assets/service-patch.jpg',
     imageAlt: { zh: '补洞修复过程', en: 'Hole repair process' },
@@ -80,7 +80,7 @@ export const services: ServiceItem[] = [
     title: { zh: '手工调色', en: 'Custom Color Mixing' },
     description: {
       zh: '凭借多年经验与敏锐色感，为各种材质精准调配色彩。无论木质纹理、石材色泽还是墙面涂料，都能实现完美匹配，恢复如初。',
-      en: 'With years of experience and a sharp sense of color, we precisely match colors for various materials. Whether wood grain, stone tones, or wall paint, we achieve perfect color matching and restore the original look.',
+      en: 'Precise color matching for wood, stone, and paint — restored to look brand new.',
     },
     image: '/assets/service-color.jpg',
     imageAlt: { zh: '手工调色过程', en: 'Custom color mixing process' },

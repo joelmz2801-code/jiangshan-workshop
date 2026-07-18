@@ -65,10 +65,11 @@ export default function ServiceCard({ service }: ServiceCardProps) {
             <p
               className="font-sans"
               style={{
-                color: 'hsl(var(--secondary))',
-                fontSize: '14px',
+                color: 'hsl(var(--foreground))',
+                opacity: 0.55,
+                fontSize: '13px',
                 lineHeight: 1.4,
-                marginTop: '0.25rem',
+                marginTop: '0.4rem',
                 letterSpacing: '0.02em',
                 margin: 0,
               }}
