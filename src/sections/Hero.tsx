@@ -18,7 +18,12 @@ export default function Hero() {
   const onAnchorClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     if (!href.startsWith('#')) return;
     e.preventDefault();
-    scrollToAnchor(href);
+    // 双 rAF 延迟，确保 DOM 状态稳定
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        scrollToAnchor(href);
+      });
+    });
   };
 
   return (

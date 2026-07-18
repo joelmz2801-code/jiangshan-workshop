@@ -8,41 +8,47 @@ export function cn(...inputs: ClassValue[]) {
 /**
  * 平滑滚动到本页锚点（#xxx）
  *
- * 关键点：
- * 1. 先同步恢复 body.overflow — 移动端抽屉菜单打开时锁定过 body 滚动，
- *    必须先解锁，否则 scrollTo 会被浏览器拒绝
- * 2. 临时关闭 scroll-snap — 否则 mandatory snap 会把页面拉回当前页
- * 3. 用 window.scrollTo 替代 scrollIntoView — 行为更可控、跨浏览器更一致
- * 4. 滚动结束后恢复 snap（等待 1200ms，覆盖大部分移动端 smooth 滚动时长）
+ * 不依赖浏览器 behavior:'smooth'（移动端可能被 scroll-snap 或其他因素吞掉），
+ * 用 requestAnimationFrame 自己实现 easeInOutCubic 缓动，每帧强制 scrollTo，
+ * 任何 snap 干扰都会被下一帧覆盖。
  */
+const easeInOutCubic = (t: number): number =>
+  t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+
 export function scrollToAnchor(href: string): void {
   if (typeof window === 'undefined') return;
   if (!href.startsWith('#')) return;
   const target = document.querySelector(href) as HTMLElement | null;
   if (!target) return;
 
-  // 1. 同步恢复 body 滚动（关键：防止被抽屉菜单的 overflow:hidden 锁住）
+  // 1. 恢复 body 滚动（防止被抽屉菜单的 overflow:hidden 锁住）
   document.body.style.overflow = '';
 
   const html = document.documentElement;
-  // 2. 临时关闭 snap
+  // 2. 临时关闭 snap（防止 mandatory 把页面拉回当前页）
   const prevSnap = html.style.scrollSnapType;
   html.style.scrollSnapType = 'none';
 
-  // 3. 用 window.scrollTo 平滑滚动到目标位置
-  const top = target.getBoundingClientRect().top + window.scrollY;
-  window.scrollTo({ top, behavior: 'smooth' });
+  // 3. 用 rAF 自实现平滑滚动，每帧强制 scrollTo
+  const targetY = target.getBoundingClientRect().top + window.scrollY;
+  const startY = window.scrollY;
+  const distance = targetY - startY;
+  const duration = 600;
+  const startTime = performance.now();
 
-  // 4. 滚动结束后恢复 snap
-  // 优先用 scrollend 事件（现代浏览器），fallback 用 setTimeout
-  let restored = false;
-  const restore = () => {
-    if (restored) return;
-    restored = true;
-    html.style.scrollSnapType = prevSnap;
-    window.removeEventListener('scrollend', restore);
+  const animate = (now: number) => {
+    const elapsed = now - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+    const eased = easeInOutCubic(progress);
+    window.scrollTo(0, startY + distance * eased);
+
+    if (progress < 1) {
+      requestAnimationFrame(animate);
+    } else {
+      // 滚动结束后恢复 snap
+      html.style.scrollSnapType = prevSnap;
+    }
   };
-  window.addEventListener('scrollend', restore, { once: true });
-  // Fallback：最长 1500ms 后强制恢复
-  window.setTimeout(restore, 1500);
+
+  requestAnimationFrame(animate);
 }

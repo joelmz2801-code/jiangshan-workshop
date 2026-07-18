@@ -44,7 +44,12 @@ export default function Navbar() {
     if (!href.startsWith('#')) return;
     e.preventDefault();
     setMobileOpen(false);
-    scrollToAnchor(href);
+    // 双 rAF 延迟：等 React 重渲染 + useEffect 完成，确保 body.overflow 已恢复
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        scrollToAnchor(href);
+      });
+    });
   };
 
   const handleNavClick = () => setMobileOpen(false);
