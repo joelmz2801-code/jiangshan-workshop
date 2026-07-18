@@ -71,7 +71,7 @@ export const services: ServiceItem[] = [
       zh: '专注木质、大理石等各类材质的孔洞修复。采用专业填充材料与精密工艺，修复后表面平整光滑，与原有材质浑然一体，不留痕迹。无论是装修遗留的钉孔、意外磕碰，还是岁月侵蚀的破损，都能恢复如初。',
       en: 'Expert repair for wood, marble, and tiles — nail holes, dents, and damage restored seamlessly.',
     },
-    image: '/assets/service-patch.jpg',
+    image: '/assets/service-patch-v2.jpg',
     imageAlt: { zh: '补洞修复过程', en: 'Hole repair process' },
     colSpan: 7,
   },
